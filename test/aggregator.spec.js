@@ -17,6 +17,10 @@ describe('The Calculator Grammar', () => {
     expect(aggregate('SUM campaigns.email.open').value).to.eql(7);
   });
 
+  it('works with average', () => {
+    expect(aggregate('AVERAGE campaigns.email.open').value).to.eql(3.5);
+  });
+
   describe('when there is a parsing error', function() {
     it('throws an exception', () => {
       expect(() => aggregate('INVALID_TOKEN')).to.throw();

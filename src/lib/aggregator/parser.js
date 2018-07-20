@@ -4,6 +4,7 @@ const { tokens, allTokens } = require('./tokens');
 const {
   LastOperator,
   SumOperator,
+  AverageOperator,
   StringLiteral
 } = tokens;
 
@@ -20,7 +21,8 @@ class AggregatorParser extends Parser {
     $.RULE('unaryExpression', () => {
       $.OR([
         { ALT: () => $.SUBRULE($.lastOperation, { LABEL: 'operation' }) },
-        { ALT: () => $.SUBRULE($.sumOperation, { LABEL: 'operation' }) }
+        { ALT: () => $.SUBRULE($.sumOperation, { LABEL: 'operation' }) },
+        { ALT: () => $.SUBRULE($.averageOperation, { LABEL: 'operation' }) }
       ]);
     });
 
@@ -31,6 +33,11 @@ class AggregatorParser extends Parser {
 
     $.RULE('sumOperation', () => {
       $.CONSUME(SumOperator);
+      $.CONSUME(StringLiteral);
+    });
+
+    $.RULE('averageOperation', () => {
+      $.CONSUME(AverageOperator);
       $.CONSUME(StringLiteral);
     });
 

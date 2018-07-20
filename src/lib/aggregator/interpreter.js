@@ -16,6 +16,11 @@ module.exports = (parser) => {
       return this.visit(ctx.operation)
     }
 
+    averageOperation(ctx) {
+      const operand = ctx.StringLiteral[0].image;
+      return this._period.average(operand);
+    }
+
     sumOperation(ctx) {
       const operand = ctx.StringLiteral[0].image;
       return this._period.sum(operand);

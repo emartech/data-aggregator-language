@@ -19,6 +19,12 @@ const SumOperator = createToken({
   categories: UnaryOperator
 });
 
+const AverageOperator = createToken({
+  name: 'AverageOperator',
+  pattern: /AVERAGE/,
+  categories: UnaryOperator
+});
+
 const WhiteSpace = createToken({
   name: 'WhiteSpace',
   pattern: /\s+/,
@@ -34,6 +40,7 @@ const allTokens = [
   WhiteSpace,
   LastOperator,
   SumOperator,
+  AverageOperator,
   UnaryOperator,
   StringLiteral
 ];
@@ -42,6 +49,7 @@ const tokens = {
   WhiteSpace,
   LastOperator,
   SumOperator,
+  AverageOperator,
   UnaryOperator,
   StringLiteral
 };
