@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const Period = require('../src/lib/period/period');
 
-describe('The Calculator Grammar', () => {
+describe('The Aggregator Grammar', () => {
   const period = Period.create([
     {date: '2017-08-15', campaigns: { email: { open: 3 }}},
     {date: '2017-08-16', campaigns: { email: { open: 4 }}}
