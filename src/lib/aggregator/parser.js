@@ -13,10 +13,6 @@ class AggregatorParser extends Parser {
 
     $.RULE('unaryExpression', () => {
       $.CONSUME(tokens.LastOperator);
-      $.SUBRULE($.stringExpression, { LABEL: 'field'});
-    });
-
-    $.RULE('stringExpression', () => {
       $.CONSUME(tokens.StringLiteral);
     });
 

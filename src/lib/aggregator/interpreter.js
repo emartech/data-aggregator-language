@@ -12,13 +12,9 @@ module.exports = (parser) => {
       return this.visit(ctx.unaryExpression);
     }
 
-    stringExpression(ctx) {
-      return ctx.StringLiteral[0].image;
-    }
-
     unaryExpression(ctx) {
-      const result = this.visit(ctx.field);
-      return this._period.last(result);
+      const operand = ctx.StringLiteral[0].image;
+      return this._period.last(operand);
     }
   }
 
