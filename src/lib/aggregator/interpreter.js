@@ -13,15 +13,17 @@ module.exports = (parser) => {
     }
 
     unaryExpression(ctx) {
+      return this.visit(ctx.operation)
+    }
+
+    sumOperation(ctx) {
       const operand = ctx.StringLiteral[0].image;
+      return this._period.sum(operand);
+    }
 
-      if (ctx.LastOperator) {
-        return this._period.last(operand);
-      }
-
-      if (ctx.SumOperator) {
-        return this._period.sum(operand);
-      }
+    lastOperation(ctx) {
+      const operand = ctx.StringLiteral[0].image;
+      return this._period.last(operand);
     }
   }
 

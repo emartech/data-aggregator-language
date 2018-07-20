@@ -3,7 +3,8 @@ const { tokens, allTokens } = require('./tokens');
 
 const {
   LastOperator,
-  SumOperator
+  SumOperator,
+  StringLiteral
 } = tokens;
 
 class AggregatorParser extends Parser {
@@ -18,11 +19,19 @@ class AggregatorParser extends Parser {
 
     $.RULE('unaryExpression', () => {
       $.OR([
-        { ALT: () => $.CONSUME(LastOperator) },
-        { ALT: () => $.CONSUME(SumOperator) }
+        { ALT: () => $.SUBRULE($.lastOperation, { LABEL: 'operation' }) },
+        { ALT: () => $.SUBRULE($.sumOperation, { LABEL: 'operation' }) }
       ]);
+    });
 
-      $.CONSUME(tokens.StringLiteral);
+    $.RULE('lastOperation', () => {
+      $.CONSUME(LastOperator);
+      $.CONSUME(StringLiteral);
+    });
+
+    $.RULE('sumOperation', () => {
+      $.CONSUME(SumOperator);
+      $.CONSUME(StringLiteral);
     });
 
     this.performSelfAnalysis();
