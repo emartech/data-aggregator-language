@@ -1,5 +1,6 @@
 'use strict';
-const { createToken, Lexer, Parser, tokenMatcher } = require('chevrotain');
+
+const { createToken, Lexer } = require('chevrotain');
 
 const UnaryOperator = createToken({
   name: 'UnaryOperator',
@@ -12,49 +13,6 @@ const LastOperator = createToken({
   categories: UnaryOperator
 });
 
-const AdditionOperator = createToken({
-  name: 'AdditionOperator',
-  pattern: Lexer.NA
-});
-
-const Plus = createToken({
-  name: 'Plus',
-  pattern: /\+/,
-  categories: AdditionOperator
-});
-const Minus = createToken({
-  name: 'Minus',
-  pattern: /-/,
-  categories: AdditionOperator
-});
-
-const MultiplicationOperator = createToken({
-  name: 'MultiplicationOperator',
-  pattern: Lexer.NA
-});
-const Multi = createToken({
-  name: 'Multi',
-  pattern: /\*/,
-  categories: MultiplicationOperator
-});
-const Div = createToken({
-  name: 'Div',
-  pattern: /\//,
-  categories: MultiplicationOperator
-});
-
-const LParen = createToken({ name: 'LParen', pattern: /\(/ });
-const RParen = createToken({ name: 'RParen', pattern: /\)/ });
-const NumberLiteral = createToken({
-  name: 'NumberLiteral',
-  pattern: /[1-9]\d*/
-});
-
-
-const PowerFunc = createToken({ name: 'PowerFunc', pattern: /power/ });
-const Comma = createToken({ name: 'Comma', pattern: /,/ });
-
-// marking WhiteSpace as 'SKIPPED' makes the lexer skip it.
 const WhiteSpace = createToken({
   name: 'WhiteSpace',
   pattern: /\s+/,
@@ -69,36 +27,14 @@ const StringLiteral = createToken({
 const allTokens = [
   WhiteSpace,
   LastOperator,
-  Plus,
-  Minus,
-  Multi,
-  Div,
-  LParen,
-  RParen,
-  NumberLiteral,
-  AdditionOperator,
   UnaryOperator,
-  MultiplicationOperator,
-  PowerFunc,
-  Comma,
   StringLiteral
 ];
 
 const tokens = {
   WhiteSpace,
   LastOperator,
-  Plus,
-  Minus,
-  Multi,
-  Div,
-  LParen,
-  RParen,
-  NumberLiteral,
-  AdditionOperator,
   UnaryOperator,
-  MultiplicationOperator,
-  PowerFunc,
-  Comma,
   StringLiteral
 };
 
