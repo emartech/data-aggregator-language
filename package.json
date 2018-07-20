@@ -4,14 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha *_spec.js"
+    "test": "mocha ./test/**/*.spec.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chevrotain": "^3.7.2"
+    "chevrotain": "^3.7.2",
+    "lodash": "^4.17.10"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
     "mocha": "^5.2.0"
   }
 }
