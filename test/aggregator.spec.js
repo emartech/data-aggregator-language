@@ -7,7 +7,7 @@ describe('The Calculator Grammar', () => {
     {date: '2017-08-16', campaigns: { email: { open: 4 }}}
   ]);
 
-  const calc = require('../src/lib/aggregator/aggregator_embedded_actions')(period);
+  const calc = require('../src/lib/aggregator/aggregator_pure_grammar')(period);
 
   it('works with last', () => {
     let result = calc('LAST campaigns.email.open');
