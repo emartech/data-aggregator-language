@@ -13,6 +13,12 @@ const LastOperator = createToken({
   categories: UnaryOperator
 });
 
+const SumOperator = createToken({
+  name: 'SumOperator',
+  pattern: /SUM/,
+  categories: UnaryOperator
+});
+
 const WhiteSpace = createToken({
   name: 'WhiteSpace',
   pattern: /\s+/,
@@ -27,6 +33,7 @@ const StringLiteral = createToken({
 const allTokens = [
   WhiteSpace,
   LastOperator,
+  SumOperator,
   UnaryOperator,
   StringLiteral
 ];
@@ -34,6 +41,7 @@ const allTokens = [
 const tokens = {
   WhiteSpace,
   LastOperator,
+  SumOperator,
   UnaryOperator,
   StringLiteral
 };

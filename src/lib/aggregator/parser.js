@@ -1,5 +1,10 @@
-const { tokens, allTokens } = require('./tokens');
 const { Parser } = require('chevrotain');
+const { tokens, allTokens } = require('./tokens');
+
+const {
+  LastOperator,
+  SumOperator
+} = tokens;
 
 class AggregatorParser extends Parser {
   constructor(input) {
@@ -12,7 +17,11 @@ class AggregatorParser extends Parser {
     });
 
     $.RULE('unaryExpression', () => {
-      $.CONSUME(tokens.LastOperator);
+      $.OR([
+        { ALT: () => $.CONSUME(LastOperator) },
+        { ALT: () => $.CONSUME(SumOperator) }
+      ]);
+
       $.CONSUME(tokens.StringLiteral);
     });
 

@@ -14,7 +14,14 @@ module.exports = (parser) => {
 
     unaryExpression(ctx) {
       const operand = ctx.StringLiteral[0].image;
-      return this._period.last(operand);
+
+      if (ctx.LastOperator) {
+        return this._period.last(operand);
+      }
+
+      if (ctx.SumOperator) {
+        return this._period.sum(operand);
+      }
     }
   }
 
