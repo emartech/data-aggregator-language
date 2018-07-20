@@ -7,10 +7,19 @@ describe('The Calculator Grammar', () => {
     {date: '2017-08-16', campaigns: { email: { open: 4 }}}
   ]);
 
-  const calc = require('../src/aggregator')(period);
+  const aggregate = require('../src/aggregator')(period);
 
   it('works with last', () => {
-    let result = calc('LAST campaigns.email.open');
-    expect(result.value).to.eql(4);
+    expect(aggregate('LAST campaigns.email.open').value).to.eql(4);
+  });
+
+  it.skip('works with sum', () => {
+    expect(aggregate('SUM campaigns.email.open').value).to.eql(7);
+  });
+
+  describe('when there is a parsing error', function() {
+    it('throws an exception', () => {
+      expect(() => aggregate('INVALID_TOKEN')).to.throw('MismatchedTokenException: Expecting token of type --> LastOperator <-- but found --> \'INVALID_TOKEN\' <--');
+    })
   })
 });

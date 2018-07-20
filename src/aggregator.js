@@ -19,6 +19,10 @@ module.exports = (period) => (text) => {
 
   const value = interpreter.visit(cst);
 
+  if (parser.errors.length > 0) {
+    throw new Error(parser.errors[0]);
+  }
+
   return {
     value: value,
     lexResult: lexResult,
