@@ -28,16 +28,20 @@ class AggregatorParser extends Parser {
 
     $.RULE('lastOperation', () => {
       $.CONSUME(LastOperator);
-      $.CONSUME(StringLiteral);
+      $.SUBRULE($.stringExpression);
     });
 
     $.RULE('sumOperation', () => {
       $.CONSUME(SumOperator);
-      $.CONSUME(StringLiteral);
+      $.SUBRULE($.stringExpression);
     });
 
     $.RULE('averageOperation', () => {
       $.CONSUME(AverageOperator);
+      $.SUBRULE($.stringExpression);
+    });
+
+    $.RULE('stringExpression', () => {
       $.CONSUME(StringLiteral);
     });
 

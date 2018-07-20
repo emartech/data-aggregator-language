@@ -17,18 +17,19 @@ module.exports = (parser) => {
     }
 
     averageOperation(ctx) {
-      const operand = ctx.StringLiteral[0].image;
-      return this._period.average(operand);
+      return this._period.average(this.visit(ctx.stringExpression));
     }
 
     sumOperation(ctx) {
-      const operand = ctx.StringLiteral[0].image;
-      return this._period.sum(operand);
+      return this._period.sum(this.visit(ctx.stringExpression));
     }
 
     lastOperation(ctx) {
-      const operand = ctx.StringLiteral[0].image;
-      return this._period.last(operand);
+      return this._period.last(this.visit(ctx.stringExpression));
+    }
+
+    stringExpression(ctx) {
+      return ctx.StringLiteral[0].image;
     }
   }
 
