@@ -18,25 +18,31 @@ class AggregatorParser extends Parser {
     const $ = this;
 
     $.RULE('expression', () => {
-      $.OR([
-        { ALT: () =>       $.SUBRULE($.binaryExpression, { LABEL: 'operationExpression' })},
-        { ALT: () => $.SUBRULE($.unaryExpression, { LABEL: 'operationExpression' })}
-      ]);
+      $.SUBRULE($.additionExpression)
     });
 
-    $.RULE('unaryExpression', () => {
+    $.RULE('additionExpression', () => {
+      $.SUBRULE($.minusExpression, { LABEL: 'lhs'});
+      $.MANY(() => {
+        $.CONSUME(PlusOperator);
+        $.SUBRULE2($.minusExpression, { LABEL: 'rhs'});
+      });
+    });
+
+    $.RULE('minusExpression', () => {
+      $.SUBRULE($.numberExpression, { LABEL: 'lhs' });
+      $.MANY(() => {
+        $.CONSUME(MinusOperator);
+        $.SUBRULE2($.numberExpression, { LABEL: 'rhs' });
+      });
+    });
+
+    $.RULE('numberExpression', () => {
       $.OR([
         { ALT: () => $.SUBRULE($.lastOperation, { LABEL: 'operation' }) },
         { ALT: () => $.SUBRULE($.sumOperation, { LABEL: 'operation' }) },
         { ALT: () => $.SUBRULE($.averageOperation, { LABEL: 'operation' }) },
-        { ALT: () => $.SUBRULE($.numberExpression, { LABEL: 'operation' }) }
-      ]);
-    });
-
-    $.RULE('binaryExpression', () => {
-      $.OR([
-        { ALT: () => $.SUBRULE($.additionExpression, { LABEL: 'operation' }) },
-        { ALT: () => $.SUBRULE($.minusExpression, { LABEL: 'operation' }) }
+        { ALT: () => $.CONSUME(NumberLiteral) }
       ]);
     });
 
@@ -55,24 +61,8 @@ class AggregatorParser extends Parser {
       $.SUBRULE($.stringExpression);
     });
 
-    $.RULE('additionExpression', () => {
-      $.SUBRULE($.unaryExpression, { LABEL: 'rhs' });
-      $.CONSUME(PlusOperator);
-      $.SUBRULE2($.unaryExpression, { LABEL: 'lhs' });
-    });
-
-    $.RULE('minusExpression', () => {
-      $.SUBRULE($.unaryExpression, { LABEL: 'rhs' });
-      $.CONSUME(MinusOperator);
-      $.SUBRULE2($.unaryExpression, { LABEL: 'lhs' });
-    });
-
     $.RULE('stringExpression', () => {
       $.CONSUME(StringLiteral);
-    });
-
-    $.RULE('numberExpression', () => {
-      $.CONSUME(NumberLiteral);
     });
 
     this.performSelfAnalysis();

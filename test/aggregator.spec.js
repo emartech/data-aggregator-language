@@ -34,7 +34,15 @@ describe('The Aggregator Grammar', () => {
   });
 
   it('has a minus operator', () => {
-    expect(aggregate('SUM campaigns.email.open - LAST campaigns.email.open').value).to.eql((3 + 4) - 4);
+    expect(aggregate('SUM campaigns.email.open - LAST campaigns.email.open').value).to.eql(3 + 4 - 4);
+  });
+
+  it('can chain addition operators', () => {
+    expect(aggregate('1 + 1 + 1').value).to.eql(3);
+  });
+
+  it('can chain minus, plus operators', () => {
+    expect(aggregate('1 - 1 + 1 - 1').value).to.eql(0);
   });
 
   describe('when there is a parsing error', function() {

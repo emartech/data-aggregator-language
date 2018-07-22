@@ -9,14 +9,31 @@ module.exports = (parser) => {
     }
 
     expression(ctx) {
-      return this.visit(ctx.operationExpression);
+      return this.visit(ctx.additionExpression);
     }
 
-    unaryExpression(ctx) {
-      return this.visit(ctx.operation);
+    additionExpression(ctx) {
+      const lhs = this.visit(ctx.lhs);
+      let rhs = 0;
+      if (ctx.rhs) {
+        ctx.rhs.forEach((rhsOperand) => rhs += this.visit(rhsOperand));
+      }
+      return lhs + rhs;
     }
 
-    binaryExpression(ctx) {
+    minusExpression(ctx) {
+      const lhs = this.visit(ctx.lhs);
+      let rhs = 0;
+      if (ctx.rhs) {
+        ctx.rhs.forEach((rhsOperand) => rhs += this.visit(rhsOperand));
+      }
+      return lhs - rhs;
+    }
+
+    numberExpression(ctx) {
+      if (ctx.NumberLiteral !== undefined) {
+        return parseInt(ctx.NumberLiteral[0].image);
+      }
       return this.visit(ctx.operation);
     }
 
@@ -32,24 +49,8 @@ module.exports = (parser) => {
       return this._period.last(this.visit(ctx.stringExpression));
     }
 
-    additionExpression(ctx) {
-      const rhs = this.visit(ctx.rhs);
-      const lhs = this.visit(ctx.lhs);
-      return rhs + lhs;
-    }
-
-    minusExpression(ctx) {
-      const rhs = this.visit(ctx.rhs);
-      const lhs = this.visit(ctx.lhs);
-      return rhs - lhs;
-    }
-
     stringExpression(ctx) {
       return ctx.StringLiteral[0].image;
-    }
-
-    numberExpression(ctx) {
-      return parseInt(ctx.NumberLiteral[0].image);
     }
   }
 
