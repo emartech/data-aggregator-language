@@ -9,11 +9,15 @@ module.exports = (parser) => {
     }
 
     expression(ctx) {
-      return this.visit(ctx.unaryExpression);
+      return this.visit(ctx.operationExpression);
     }
 
     unaryExpression(ctx) {
-      return this.visit(ctx.operation)
+      return this.visit(ctx.operation);
+    }
+
+    binaryExpression(ctx) {
+      return this.visit(ctx.operation);
     }
 
     averageOperation(ctx) {
@@ -26,6 +30,12 @@ module.exports = (parser) => {
 
     lastOperation(ctx) {
       return this._period.last(this.visit(ctx.stringExpression));
+    }
+
+    additionExpression(ctx) {
+      const rhs = this.visit(ctx.rhs);
+      const lhs = this.visit(ctx.lhs);
+      return rhs + lhs;
     }
 
     stringExpression(ctx) {

@@ -7,6 +7,11 @@ const UnaryOperator = createToken({
   pattern: Lexer.NA
 });
 
+const BinaryOperator = createToken({
+  name: 'BinaryOperator',
+  pattern: Lexer.NA
+});
+
 const LastOperator = createToken({
   name: 'LastOperator',
   pattern: /LAST/,
@@ -25,6 +30,12 @@ const AverageOperator = createToken({
   categories: UnaryOperator
 });
 
+const PlusOperator = createToken({
+  name: 'PlusOperator',
+  pattern: /\+/,
+  categories: BinaryOperator
+});
+
 const WhiteSpace = createToken({
   name: 'WhiteSpace',
   pattern: /\s+/,
@@ -41,7 +52,9 @@ const allTokens = [
   LastOperator,
   SumOperator,
   AverageOperator,
+  PlusOperator,
   UnaryOperator,
+  BinaryOperator,
   StringLiteral
 ];
 
@@ -50,7 +63,9 @@ const tokens = {
   LastOperator,
   SumOperator,
   AverageOperator,
+  PlusOperator,
   UnaryOperator,
+  BinaryOperator,
   StringLiteral
 };
 

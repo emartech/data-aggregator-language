@@ -5,6 +5,7 @@ const {
   LastOperator,
   SumOperator,
   AverageOperator,
+  PlusOperator,
   StringLiteral
 } = tokens;
 
@@ -15,7 +16,10 @@ class AggregatorParser extends Parser {
     const $ = this;
 
     $.RULE('expression', () => {
-      $.SUBRULE($.unaryExpression);
+      $.OR([
+        { ALT: () =>       $.SUBRULE($.binaryExpression, { LABEL: 'operationExpression' })},
+        { ALT: () => $.SUBRULE($.unaryExpression, { LABEL: 'operationExpression' })}
+      ]);
     });
 
     $.RULE('unaryExpression', () => {
@@ -24,6 +28,10 @@ class AggregatorParser extends Parser {
         { ALT: () => $.SUBRULE($.sumOperation, { LABEL: 'operation' }) },
         { ALT: () => $.SUBRULE($.averageOperation, { LABEL: 'operation' }) }
       ]);
+    });
+
+    $.RULE('binaryExpression', () => {
+      $.SUBRULE($.additionExpression, { LABEL: 'operation' });
     });
 
     $.RULE('lastOperation', () => {
@@ -39,6 +47,12 @@ class AggregatorParser extends Parser {
     $.RULE('averageOperation', () => {
       $.CONSUME(AverageOperator);
       $.SUBRULE($.stringExpression);
+    });
+
+    $.RULE('additionExpression', () => {
+      $.SUBRULE($.unaryExpression, { LABEL: 'rhs' });
+      $.CONSUME(PlusOperator);
+      $.SUBRULE2($.unaryExpression, { LABEL: 'lhs' });
     });
 
     $.RULE('stringExpression', () => {

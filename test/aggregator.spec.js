@@ -9,16 +9,20 @@ describe('The Aggregator Grammar', () => {
 
   const aggregate = require('../src/aggregator')(period);
 
-  it('works with last', () => {
+  it('has a last operator', () => {
     expect(aggregate('LAST campaigns.email.open').value).to.eql(4);
   });
 
-  it('works with sum', () => {
+  it('has a sum operator', () => {
     expect(aggregate('SUM campaigns.email.open').value).to.eql(7);
   });
 
-  it('works with average', () => {
+  it('has an average operator', () => {
     expect(aggregate('AVERAGE campaigns.email.open').value).to.eql(3.5);
+  });
+
+  it('has an addition operator', () => {
+    expect(aggregate('SUM campaigns.email.open + LAST campaigns.email.open').value).to.eql((3 + 4) + 4);
   });
 
   describe('when there is a parsing error', function() {
