@@ -41,6 +41,10 @@ describe('The Aggregator Grammar', () => {
     expect(aggregate('1 + 1 + 1').value).to.eql(3);
   });
 
+  it('can chain binary and unary operators', () => {
+    expect(aggregate('LAST campaigns.email.open + 1 - LAST campaigns.email.open').value).to.eql(1);
+  });
+
   it('can chain minus, plus operators', () => {
     expect(aggregate('1 - 1 + 1 - 1').value).to.eql(0);
   });
