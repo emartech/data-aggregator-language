@@ -38,6 +38,12 @@ module.exports = (parser) => {
       return rhs + lhs;
     }
 
+    minusExpression(ctx) {
+      const rhs = this.visit(ctx.rhs);
+      const lhs = this.visit(ctx.lhs);
+      return rhs - lhs;
+    }
+
     stringExpression(ctx) {
       return ctx.StringLiteral[0].image;
     }
