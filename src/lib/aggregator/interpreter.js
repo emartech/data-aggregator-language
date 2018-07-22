@@ -41,6 +41,10 @@ module.exports = (parser) => {
     stringExpression(ctx) {
       return ctx.StringLiteral[0].image;
     }
+
+    numberExpression(ctx) {
+      return parseInt(ctx.NumberLiteral[0].image);
+    }
   }
 
   return AggregatorInterpreter;

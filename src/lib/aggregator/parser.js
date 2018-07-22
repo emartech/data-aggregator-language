@@ -6,7 +6,8 @@ const {
   SumOperator,
   AverageOperator,
   PlusOperator,
-  StringLiteral
+  StringLiteral,
+  NumberLiteral
 } = tokens;
 
 class AggregatorParser extends Parser {
@@ -26,7 +27,8 @@ class AggregatorParser extends Parser {
       $.OR([
         { ALT: () => $.SUBRULE($.lastOperation, { LABEL: 'operation' }) },
         { ALT: () => $.SUBRULE($.sumOperation, { LABEL: 'operation' }) },
-        { ALT: () => $.SUBRULE($.averageOperation, { LABEL: 'operation' }) }
+        { ALT: () => $.SUBRULE($.averageOperation, { LABEL: 'operation' }) },
+        { ALT: () => $.SUBRULE($.numberExpression, { LABEL: 'operation' }) }
       ]);
     });
 
@@ -57,6 +59,10 @@ class AggregatorParser extends Parser {
 
     $.RULE('stringExpression', () => {
       $.CONSUME(StringLiteral);
+    });
+
+    $.RULE('numberExpression', () => {
+      $.CONSUME(NumberLiteral);
     });
 
     this.performSelfAnalysis();

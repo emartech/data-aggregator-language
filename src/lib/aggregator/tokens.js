@@ -47,6 +47,11 @@ const StringLiteral = createToken({
   pattern: /[\w\.]+/
 });
 
+const NumberLiteral = createToken({
+  name: 'NumberLiteral',
+  pattern: /[1-9]\d*/
+});
+
 const allTokens = [
   WhiteSpace,
   LastOperator,
@@ -55,6 +60,7 @@ const allTokens = [
   PlusOperator,
   UnaryOperator,
   BinaryOperator,
+  NumberLiteral,
   StringLiteral
 ];
 
@@ -66,6 +72,7 @@ const tokens = {
   PlusOperator,
   UnaryOperator,
   BinaryOperator,
+  NumberLiteral,
   StringLiteral
 };
 

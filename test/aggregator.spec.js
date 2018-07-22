@@ -25,6 +25,10 @@ describe('The Aggregator Grammar', () => {
     expect(aggregate('SUM campaigns.email.open + LAST campaigns.email.open').value).to.eql((3 + 4) + 4);
   });
 
+  it('has an addition operator that works with number literals', () => {
+    expect(aggregate('SUM campaigns.email.open + 1').value).to.eql((3 + 4) + 1);
+  });
+
   describe('when there is a parsing error', function() {
     it('throws an exception', () => {
       expect(() => aggregate('INVALID_TOKEN')).to.throw();
