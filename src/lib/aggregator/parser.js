@@ -9,6 +9,8 @@ const {
   MinusOperator,
   MultiplicationOperator,
   DivisionOperator,
+  OpeningParen,
+  ClosingParen,
   StringLiteral,
   NumberLiteral
 } = tokens;
@@ -60,6 +62,7 @@ class AggregatorParser extends Parser {
         { ALT: () => $.SUBRULE($.lastOperation, { LABEL: 'operation' }) },
         { ALT: () => $.SUBRULE($.sumOperation, { LABEL: 'operation' }) },
         { ALT: () => $.SUBRULE($.averageOperation, { LABEL: 'operation' }) },
+        { ALT: () => $.SUBRULE($.parenthesisExpression) },
         { ALT: () => $.CONSUME(NumberLiteral) }
       ]);
     });
@@ -77,6 +80,12 @@ class AggregatorParser extends Parser {
     $.RULE('averageOperation', () => {
       $.CONSUME(AverageOperator);
       $.SUBRULE($.stringExpression);
+    });
+
+    $.RULE('parenthesisExpression', () => {
+      $.CONSUME(OpeningParen);
+      $.SUBRULE($.expression);
+      $.CONSUME(ClosingParen);
     });
 
     $.RULE('stringExpression', () => {

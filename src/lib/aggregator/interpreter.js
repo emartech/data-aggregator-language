@@ -52,7 +52,14 @@ module.exports = (parser) => {
       if (ctx.NumberLiteral !== undefined) {
         return parseInt(ctx.NumberLiteral[0].image);
       }
+      if (ctx.parenthesisExpression) {
+        return this.visit(ctx.parenthesisExpression);
+      }
       return this.visit(ctx.operation);
+    }
+
+    parenthesisExpression(ctx) {
+      return this.visit(ctx.expression);
     }
 
     averageOperation(ctx) {
