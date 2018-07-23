@@ -42,6 +42,12 @@ const MinusOperator = createToken({
   categories: BinaryOperator
 });
 
+const MultiplicationOperator = createToken({
+  name: 'MultiplicationOperator',
+  pattern: /\*/,
+  categories: BinaryOperator
+});
+
 const WhiteSpace = createToken({
   name: 'WhiteSpace',
   pattern: /\s+/,
@@ -65,6 +71,7 @@ const allTokens = [
   AverageOperator,
   PlusOperator,
   MinusOperator,
+  MultiplicationOperator,
   UnaryOperator,
   BinaryOperator,
   NumberLiteral,
@@ -78,6 +85,7 @@ const tokens = {
   AverageOperator,
   PlusOperator,
   MinusOperator,
+  MultiplicationOperator,
   UnaryOperator,
   BinaryOperator,
   NumberLiteral,

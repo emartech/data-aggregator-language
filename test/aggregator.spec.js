@@ -49,6 +49,14 @@ describe('The Aggregator Grammar', () => {
     expect(aggregate('1 - 1 + 1 - 1').value).to.eql(0);
   });
 
+  it('has a multiplication operator', () => {
+    expect(aggregate('2 * 3').value).to.eql(6);
+  });
+
+  it('applies the right precedence to the multiplication operator', () => {
+    expect(aggregate('2 + 3 * 3').value).to.eql(11);
+  });
+
   describe('when there is a parsing error', function() {
     it('throws an exception', () => {
       expect(() => aggregate('INVALID_TOKEN')).to.throw();
