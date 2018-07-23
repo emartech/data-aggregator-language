@@ -8,10 +8,6 @@ module.exports = (parser) => {
       this.validateVisitor();
     }
 
-    expression(ctx) {
-      return this.visit(ctx.additionExpression);
-    }
-
     additionExpression(ctx) {
       const lhs = this.visit(ctx.lhs);
       let rhs = 0;
@@ -59,7 +55,7 @@ module.exports = (parser) => {
     }
 
     parenthesisExpression(ctx) {
-      return this.visit(ctx.expression);
+      return this.visit(ctx.additionExpression);
     }
 
     averageOperation(ctx) {

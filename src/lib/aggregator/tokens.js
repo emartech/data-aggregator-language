@@ -2,56 +2,39 @@
 
 const { createToken, Lexer } = require('chevrotain');
 
-const UnaryOperator = createToken({
-  name: 'UnaryOperator',
-  pattern: Lexer.NA
-});
-
-const BinaryOperator = createToken({
-  name: 'BinaryOperator',
-  pattern: Lexer.NA
-});
-
 const LastOperator = createToken({
   name: 'LastOperator',
-  pattern: /LAST/,
-  categories: UnaryOperator
+  pattern: /LAST/
 });
 
 const SumOperator = createToken({
   name: 'SumOperator',
-  pattern: /SUM/,
-  categories: UnaryOperator
+  pattern: /SUM/
 });
 
 const AverageOperator = createToken({
   name: 'AverageOperator',
-  pattern: /AVERAGE/,
-  categories: UnaryOperator
+  pattern: /AVERAGE/
 });
 
 const PlusOperator = createToken({
   name: 'PlusOperator',
-  pattern: /\+/,
-  categories: BinaryOperator
+  pattern: /\+/
 });
 
 const MinusOperator = createToken({
   name: 'MinusOperator',
-  pattern: /\-/,
-  categories: BinaryOperator
+  pattern: /\-/
 });
 
 const MultiplicationOperator = createToken({
   name: 'MultiplicationOperator',
-  pattern: /\*/,
-  categories: BinaryOperator
+  pattern: /\*/
 });
 
 const DivisionOperator = createToken({
   name: 'DivisionOperator',
-  pattern: /\//,
-  categories: BinaryOperator
+  pattern: /\//
 });
 
 const OpeningParen = createToken({
@@ -91,8 +74,6 @@ const allTokens = [
   DivisionOperator,
   OpeningParen,
   ClosingParen,
-  UnaryOperator,
-  BinaryOperator,
   NumberLiteral,
   StringLiteral
 ];
@@ -108,8 +89,6 @@ const tokens = {
   DivisionOperator,
   OpeningParen,
   ClosingParen,
-  UnaryOperator,
-  BinaryOperator,
   NumberLiteral,
   StringLiteral
 };

@@ -15,7 +15,7 @@ module.exports = (period) => (text) => {
   const lexResult = CalculatorLexer.tokenize(text);
 
   parser.input = lexResult.tokens;
-  const cst = parser.expression();
+  const cst = parser.additionExpression();
 
   const value = interpreter.visit(cst);
 

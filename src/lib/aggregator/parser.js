@@ -21,10 +21,6 @@ class AggregatorParser extends Parser {
 
     const $ = this;
 
-    $.RULE('expression', () => {
-      $.SUBRULE($.additionExpression);
-    });
-
     $.RULE('additionExpression', () => {
       $.SUBRULE($.minusExpression, { LABEL: 'lhs'});
       $.MANY(() => {
@@ -84,7 +80,7 @@ class AggregatorParser extends Parser {
 
     $.RULE('parenthesisExpression', () => {
       $.CONSUME(OpeningParen);
-      $.SUBRULE($.expression);
+      $.SUBRULE($.additionExpression);
       $.CONSUME(ClosingParen);
     });
 
