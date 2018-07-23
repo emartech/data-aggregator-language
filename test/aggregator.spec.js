@@ -57,6 +57,10 @@ describe('The Aggregator Grammar', () => {
     expect(aggregate('2 + 3 * 3').value).to.eql(11);
   });
 
+  it('chains multiplication operators correclty', () => {
+    expect(aggregate('2 * 2 * 2 * 2').value).to.eql(2 ** 4);
+  });
+
   describe('when there is a parsing error', function() {
     it('throws an exception', () => {
       expect(() => aggregate('INVALID_TOKEN')).to.throw();
