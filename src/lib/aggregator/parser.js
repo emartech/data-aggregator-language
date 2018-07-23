@@ -8,6 +8,7 @@ const {
   PlusOperator,
   MinusOperator,
   MultiplicationOperator,
+  DivisionOperator,
   StringLiteral,
   NumberLiteral
 } = tokens;
@@ -39,13 +40,20 @@ class AggregatorParser extends Parser {
     });
 
     $.RULE('multiplicationExpression', () => {
-      $.SUBRULE($.numberExpression, { LABEL: 'lhs' });
+      $.SUBRULE($.divisionExpression, { LABEL: 'lhs' });
       $.MANY(() => {
         $.CONSUME(MultiplicationOperator);
-        $.SUBRULE2($.numberExpression, { LABEL: 'rhs'});
+        $.SUBRULE2($.divisionExpression, { LABEL: 'rhs'});
       });
     });
 
+    $.RULE('divisionExpression', () => {
+      $.SUBRULE($.numberExpression, { LABEL: 'lhs' });
+      $.MANY(() => {
+        $.CONSUME(DivisionOperator);
+        $.SUBRULE2($.numberExpression, { LABEL: 'rhs'});
+      });
+    });
 
     $.RULE('numberExpression', () => {
       $.OR([

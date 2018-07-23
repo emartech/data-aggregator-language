@@ -39,6 +39,15 @@ module.exports = (parser) => {
       return lhs * rhs;
     }
 
+    divisionExpression(ctx) {
+      const lhs = this.visit(ctx.lhs);
+      let rhs = 1;
+      if (ctx.rhs) {
+        ctx.rhs.forEach((rhsOperand) => rhs *= this.visit(rhsOperand));
+      }
+      return lhs / rhs;
+    }
+
     numberExpression(ctx) {
       if (ctx.NumberLiteral !== undefined) {
         return parseInt(ctx.NumberLiteral[0].image);

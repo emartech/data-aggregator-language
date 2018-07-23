@@ -61,6 +61,10 @@ describe('The Aggregator Grammar', () => {
     expect(aggregate('2 * 2 * 2 * 2').value).to.eql(2 ** 4);
   });
 
+  it('has a division operator', () => {
+    expect(aggregate('2 / 2').value).to.eql(1);
+  });
+
   describe('when there is a parsing error', function() {
     it('throws an exception', () => {
       expect(() => aggregate('INVALID_TOKEN')).to.throw();
