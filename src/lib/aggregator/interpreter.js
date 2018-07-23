@@ -9,39 +9,19 @@ module.exports = (parser) => {
     }
 
     additionExpression(ctx) {
-      const lhs = this.visit(ctx.lhs);
-      let rhs = 0;
-      if (ctx.rhs) {
-        ctx.rhs.forEach((rhsOperand) => rhs += this.visit(rhsOperand));
-      }
-      return lhs + rhs;
+      return this.visit(ctx.lhs) + this._accumulateAdditiveRhs(ctx.rhs);
     }
 
     minusExpression(ctx) {
-      const lhs = this.visit(ctx.lhs);
-      let rhs = 0;
-      if (ctx.rhs) {
-        ctx.rhs.forEach((rhsOperand) => rhs += this.visit(rhsOperand));
-      }
-      return lhs - rhs;
+      return this.visit(ctx.lhs) - this._accumulateAdditiveRhs(ctx.rhs);
     }
 
     multiplicationExpression(ctx) {
-      const lhs = this.visit(ctx.lhs);
-      let rhs = 1;
-      if (ctx.rhs) {
-        ctx.rhs.forEach((rhsOperand) => rhs *= this.visit(rhsOperand));
-      }
-      return lhs * rhs;
+      return this.visit(ctx.lhs) * this._accumulateMultiplicativeRhs(ctx.rhs);
     }
 
     divisionExpression(ctx) {
-      const lhs = this.visit(ctx.lhs);
-      let rhs = 1;
-      if (ctx.rhs) {
-        ctx.rhs.forEach((rhsOperand) => rhs *= this.visit(rhsOperand));
-      }
-      return lhs / rhs;
+      return this.visit(ctx.lhs) / this._accumulateMultiplicativeRhs(ctx.rhs);
     }
 
     binaryOperandExpression(ctx) {
@@ -72,6 +52,21 @@ module.exports = (parser) => {
 
     stringExpression(ctx) {
       return ctx.StringLiteral[0].image;
+    }
+
+    _accumulateAdditiveRhs(rhs) {
+      return this._accumulateRhs(rhs, 0, (accumulator, current) => accumulator + this.visit(current));
+    }
+
+    _accumulateMultiplicativeRhs(rhs) {
+      return this._accumulateRhs(rhs, 1, (accumulator, current) => accumulator * this.visit(current));
+    }
+
+    _accumulateRhs(rhs, init, accumulateOperation) {
+      if (rhs) {
+        return rhs.reduce(accumulateOperation, init)
+      }
+      return init;
     }
   }
 
