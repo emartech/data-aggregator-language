@@ -57,7 +57,7 @@ describe('The Aggregator Grammar', () => {
     expect(aggregate('2 + 3 * 3').value).to.eql(11);
   });
 
-  it('chains multiplication operators correclty', () => {
+  it('chains multiplication operators correctly', () => {
     expect(aggregate('2 * 2 * 2 * 2').value).to.eql(2 ** 4);
   });
 
