@@ -46,18 +46,18 @@ class AggregatorParser extends Parser {
     });
 
     $.RULE('divisionExpression', () => {
-      $.SUBRULE($.numberExpression, { LABEL: 'lhs' });
+      $.SUBRULE($.binaryOperandExpression, { LABEL: 'lhs' });
       $.MANY(() => {
         $.CONSUME(DivisionOperator);
-        $.SUBRULE2($.numberExpression, { LABEL: 'rhs'});
+        $.SUBRULE2($.binaryOperandExpression, { LABEL: 'rhs'});
       });
     });
 
-    $.RULE('numberExpression', () => {
+    $.RULE('binaryOperandExpression', () => {
       $.OR([
-        { ALT: () => $.SUBRULE($.lastOperation, { LABEL: 'operation' }) },
-        { ALT: () => $.SUBRULE($.sumOperation, { LABEL: 'operation' }) },
-        { ALT: () => $.SUBRULE($.averageOperation, { LABEL: 'operation' }) },
+        { ALT: () => $.SUBRULE($.lastOperation, { LABEL: 'unaryOperation' }) },
+        { ALT: () => $.SUBRULE($.sumOperation, { LABEL: 'unaryOperation' }) },
+        { ALT: () => $.SUBRULE($.averageOperation, { LABEL: 'unaryOperation' }) },
         { ALT: () => $.SUBRULE($.parenthesisExpression) },
         { ALT: () => $.CONSUME(NumberLiteral) }
       ]);

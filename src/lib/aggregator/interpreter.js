@@ -44,14 +44,14 @@ module.exports = (parser) => {
       return lhs / rhs;
     }
 
-    numberExpression(ctx) {
+    binaryOperandExpression(ctx) {
       if (ctx.NumberLiteral !== undefined) {
         return parseInt(ctx.NumberLiteral[0].image);
       }
       if (ctx.parenthesisExpression) {
         return this.visit(ctx.parenthesisExpression);
       }
-      return this.visit(ctx.operation);
+      return this.visit(ctx.unaryOperation);
     }
 
     parenthesisExpression(ctx) {
