@@ -70,7 +70,7 @@ describe('The Aggregator Grammar', () => {
   });
 
   it('applies the right precedence to the division operator', () => {
-    expect(aggregate('10 + 10 / 2 * 3').value).to.eql(10 + ((10 / 2) * 3));
+    expect(aggregate('10 + 10 * 3 / 3').value).to.eql(10 + ((10 * 3) / 3));
   });
 
   describe('when there is a parsing error', function() {
