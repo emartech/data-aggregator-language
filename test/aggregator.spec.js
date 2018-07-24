@@ -123,7 +123,11 @@ describe('The Aggregator Grammar', () => {
       expect(() => aggregate('(1 + 2)(')).to.throw('Error parsing "(1 + 2)("')
     });
 
-    it('throws an exception when a', () => {
+    it('does not allow parens between unary operator and operand', () => {
+      expect(() => aggregate('LAST(campaigns)')).to.throw('Error parsing "LAST(campaigns)"')
+    });
+
+    it('throws an exception when a unary operation has no argument', () => {
       expect(() => aggregate('LAST + 2')).to.throw('Error parsing "LAST + 2"');
     })
   })
