@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = (parser) => {
   const BaseCstVisitor = parser.getBaseCstVisitorConstructor();
 

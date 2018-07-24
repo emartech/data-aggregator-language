@@ -1,3 +1,5 @@
+'use strict';
+
 const { Parser } = require('chevrotain');
 const { tokens, allTokens } = require('./tokens');
 
