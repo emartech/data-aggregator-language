@@ -27,13 +27,7 @@ module.exports = (parser) => {
     }
 
     binaryOperandExpression(ctx) {
-      if (ctx.NumberLiteral !== undefined) {
-        return parseInt(ctx.NumberLiteral[0].image);
-      }
-      if (ctx.parenthesisExpression) {
-        return this.visit(ctx.parenthesisExpression);
-      }
-      return this.visit(ctx.unaryOperation);
+      return this.visit(ctx.expression);
     }
 
     parenthesisExpression(ctx) {
@@ -50,6 +44,14 @@ module.exports = (parser) => {
 
     lastOperation(ctx) {
       return this._period.last(this.visit(ctx.stringExpression));
+    }
+
+    lengthConstant() {
+      return this._period.length;
+    }
+
+    numberExpression(ctx) {
+      return parseInt(ctx.NumberLiteral[0].image);
     }
 
     stringExpression(ctx) {

@@ -49,6 +49,9 @@ class Period {
     return !this._data.last();
   }
 
+  get length() {
+    return this._data.value().length;
+  }
 
   static create(data) {
     return new Period(data);

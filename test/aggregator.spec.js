@@ -22,6 +22,10 @@ describe('The Aggregator Grammar', () => {
       expect(aggregate('AVERAGE campaigns.email.open').value).to.eql(3.5);
     });
 
+    it('has a LENGTH constant', () => {
+      expect(aggregate('LENGTH').value).to.eql(2);
+    });
+
     it('has a rule for number literals', () => {
       expect(aggregate('1').value).to.eql(1);
     });

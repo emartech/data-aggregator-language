@@ -7,6 +7,7 @@ const {
   LastOperator,
   SumOperator,
   AverageOperator,
+  LengthConstant,
   PlusOperator,
   MinusOperator,
   MultiplicationOperator,
@@ -57,11 +58,12 @@ class AggregatorParser extends Parser {
 
     $.RULE('binaryOperandExpression', () => {
       $.OR([
-        { ALT: () => $.SUBRULE($.lastOperation, { LABEL: 'unaryOperation' }) },
-        { ALT: () => $.SUBRULE($.sumOperation, { LABEL: 'unaryOperation' }) },
-        { ALT: () => $.SUBRULE($.averageOperation, { LABEL: 'unaryOperation' }) },
-        { ALT: () => $.SUBRULE($.parenthesisExpression) },
-        { ALT: () => $.CONSUME(NumberLiteral) }
+        { ALT: () => $.SUBRULE($.lastOperation, { LABEL: 'expression' }) },
+        { ALT: () => $.SUBRULE($.sumOperation, { LABEL: 'expression' }) },
+        { ALT: () => $.SUBRULE($.averageOperation, { LABEL: 'expression' }) },
+        { ALT: () => $.SUBRULE($.lengthConstant, { LABEL: 'expression' }) },
+        { ALT: () => $.SUBRULE($.parenthesisExpression, { LABEL: 'expression' }) },
+        { ALT: () => $.SUBRULE($.numberExpression, { LABEL: 'expression'}) },
       ]);
     });
 
@@ -80,10 +82,18 @@ class AggregatorParser extends Parser {
       $.SUBRULE($.stringExpression);
     });
 
+    $.RULE('lengthConstant', () => {
+      $.CONSUME(LengthConstant);
+    });
+
     $.RULE('parenthesisExpression', () => {
       $.CONSUME(OpeningParen);
       $.SUBRULE($.additionExpression);
       $.CONSUME(ClosingParen);
+    });
+
+    $.RULE('numberExpression', () => {
+      $.CONSUME(NumberLiteral);
     });
 
     $.RULE('stringExpression', () => {
