@@ -69,7 +69,7 @@ describe('The Aggregator Grammar', () => {
       });
 
       it('chains', () => {
-        expect(aggregate('2 * 2 * 2 * 2').value).to.eql(2 ** 4);
+        expect(aggregate('2 * 2 * 2 * 2').value).to.eql(16);
       });
 
       it('has a higher precedence than the plus operator', () => {

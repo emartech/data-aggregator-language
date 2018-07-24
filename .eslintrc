@@ -26,6 +26,6 @@
     "security/detect-non-literal-fs-filename": "off"
   },
   "parserOptions": {
-    "ecmaVersion": 2018
+    "ecmaVersion": "2015"
   }
 }
