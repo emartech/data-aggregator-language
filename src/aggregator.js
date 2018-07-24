@@ -5,13 +5,14 @@ const { Lexer } = require('chevrotain');
 const AggregatorParser = require('./lib/aggregator/parser');
 const { allTokens } = require('./lib/aggregator/tokens');
 const interpreterFactory = require('./lib/aggregator/interpreter');
+const Period = require('../src/lib/period/period');
 
-module.exports = (period) => (text) => {
+module.exports = (input) => (text) => {
   const CalculatorLexer = new Lexer(allTokens);
   const parser = new AggregatorParser([]);
 
   const AggregatorInterpreter = interpreterFactory(parser);
-  const interpreter = new AggregatorInterpreter(period);
+  const interpreter = new AggregatorInterpreter(Period.create(input));
   const lexResult = CalculatorLexer.tokenize(text);
 
   parser.input = lexResult.tokens;

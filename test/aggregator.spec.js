@@ -1,15 +1,13 @@
 'use strict';
 
 const { expect } = require('chai');
-const Period = require('../src/lib/period/period');
 
 describe('The Aggregator Grammar', () => {
-  const period = Period.create([
+  const input = [
     { date: '2017-08-15', campaigns: { email: { open: 3 } } },
     { date: '2017-08-16', campaigns: { email: { open: 4 } } }
-  ]);
-
-  const aggregate = require('../src/aggregator')(period);
+  ];
+  const aggregate = require('../src/aggregator')(input);
 
   describe('Binary Operands', () => {
     it('has a last operator', () => {
