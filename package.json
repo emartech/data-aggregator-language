@@ -1,22 +1,22 @@
 {
-  "name": "aggregator",
+  "name": "@emartech/data-aggregator-language",
   "version": "1.0.0",
-  "description": "",
+  "description": "Execute aggregation expressions on a given data set.",
   "main": "index.js",
   "scripts": {
     "test": "npm run test:style && npm run test:unit",
     "test:unit": "mocha ./test/**/*.spec.js",
     "test:style": "eslint --fix --ext .js src test"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Emarsys",
+  "license": "MIT",
   "dependencies": {
-    "chevrotain": "^3.7.2",
-    "lodash": "^4.17.10"
+    "chevrotain": "3.7.2",
+    "lodash": "4.17.10"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
-    "mocha": "^5.2.0",
+    "chai": "4.1.2",
+    "mocha": "5.2.0",
     "eslint": "5.1.0",
     "eslint-config-emarsys": "5.1.0",
     "eslint-plugin-require-path-exists": "1.1.7"
