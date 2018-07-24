@@ -1,42 +1,46 @@
 'use strict';
 
+/* eslint new-cap: 0 */
+
 const { Parser } = require('chevrotain');
 const { allTokens } = require('./tokens');
 
 const [
+  /* eslint-disable-next-line no-unused-vars */
   _,
-  LastOperator,
-  SumOperator,
-  AverageOperator,
-  LengthConstant,
-  PlusOperator,
-  MinusOperator,
-  MultiplicationOperator,
-  DivisionOperator,
-  OpeningParen,
-  ClosingParen,
-  NumberLiteral,
-  StringLiteral
+  lastOperator,
+  sumOperator,
+  averageOperator,
+  lengthConstant,
+  plusOperator,
+  minusOperator,
+  multiplicationOperator,
+  divisionOperator,
+  openingParen,
+  closingParen,
+  numberLiteral,
+  stringLiteral
 ] = allTokens;
 
 class AggregatorParser extends Parser {
   constructor(input) {
     super(input, allTokens, { outputCst: true });
 
+    /* eslint-disable-next-line consistent-this */
     const $ = this;
 
     $.RULE('additionExpression', () => {
-      $.SUBRULE($.minusExpression, { LABEL: 'lhs'});
+      $.SUBRULE($.minusExpression, { LABEL: 'lhs' });
       $.MANY(() => {
-        $.CONSUME(PlusOperator);
-        $.SUBRULE2($.minusExpression, { LABEL: 'rhs'});
+        $.CONSUME(plusOperator);
+        $.SUBRULE2($.minusExpression, { LABEL: 'rhs' });
       });
     });
 
     $.RULE('minusExpression', () => {
       $.SUBRULE($.multiplicationExpression, { LABEL: 'lhs' });
       $.MANY(() => {
-        $.CONSUME(MinusOperator);
+        $.CONSUME(minusOperator);
         $.SUBRULE2($.multiplicationExpression, { LABEL: 'rhs' });
       });
     });
@@ -44,61 +48,61 @@ class AggregatorParser extends Parser {
     $.RULE('multiplicationExpression', () => {
       $.SUBRULE($.divisionExpression, { LABEL: 'lhs' });
       $.MANY(() => {
-        $.CONSUME(MultiplicationOperator);
-        $.SUBRULE2($.divisionExpression, { LABEL: 'rhs'});
+        $.CONSUME(multiplicationOperator);
+        $.SUBRULE2($.divisionExpression, { LABEL: 'rhs' });
       });
     });
 
     $.RULE('divisionExpression', () => {
       $.SUBRULE($.binaryOperandExpression, { LABEL: 'lhs' });
       $.MANY(() => {
-        $.CONSUME(DivisionOperator);
-        $.SUBRULE2($.binaryOperandExpression, { LABEL: 'rhs'});
+        $.CONSUME(divisionOperator);
+        $.SUBRULE2($.binaryOperandExpression, { LABEL: 'rhs' });
       });
     });
 
     $.RULE('binaryOperandExpression', () => {
       $.OR([
-        { ALT: () => $.SUBRULE($.lastOperation, { LABEL: 'expression' }) },
-        { ALT: () => $.SUBRULE($.sumOperation, { LABEL: 'expression' }) },
-        { ALT: () => $.SUBRULE($.averageOperation, { LABEL: 'expression' }) },
-        { ALT: () => $.SUBRULE($.lengthConstant, { LABEL: 'expression' }) },
+        { ALT: () => $.SUBRULE($.lastExpression, { LABEL: 'expression' }) },
+        { ALT: () => $.SUBRULE($.sumExpression, { LABEL: 'expression' }) },
+        { ALT: () => $.SUBRULE($.averageExpression, { LABEL: 'expression' }) },
+        { ALT: () => $.SUBRULE($.lengthExpression, { LABEL: 'expression' }) },
         { ALT: () => $.SUBRULE($.parenthesisExpression, { LABEL: 'expression' }) },
-        { ALT: () => $.SUBRULE($.numberExpression, { LABEL: 'expression'}) },
+        { ALT: () => $.SUBRULE($.numberExpression, { LABEL: 'expression' }) }
       ]);
     });
 
-    $.RULE('lastOperation', () => {
-      $.CONSUME(LastOperator);
+    $.RULE('lastExpression', () => {
+      $.CONSUME(lastOperator);
       $.SUBRULE($.stringExpression);
     });
 
-    $.RULE('sumOperation', () => {
-      $.CONSUME(SumOperator);
+    $.RULE('sumExpression', () => {
+      $.CONSUME(sumOperator);
       $.SUBRULE($.stringExpression);
     });
 
-    $.RULE('averageOperation', () => {
-      $.CONSUME(AverageOperator);
+    $.RULE('averageExpression', () => {
+      $.CONSUME(averageOperator);
       $.SUBRULE($.stringExpression);
     });
 
-    $.RULE('lengthConstant', () => {
-      $.CONSUME(LengthConstant);
+    $.RULE('lengthExpression', () => {
+      $.CONSUME(lengthConstant);
     });
 
     $.RULE('parenthesisExpression', () => {
-      $.CONSUME(OpeningParen);
+      $.CONSUME(openingParen);
       $.SUBRULE($.additionExpression);
-      $.CONSUME(ClosingParen);
+      $.CONSUME(closingParen);
     });
 
     $.RULE('numberExpression', () => {
-      $.CONSUME(NumberLiteral);
+      $.CONSUME(numberLiteral);
     });
 
     $.RULE('stringExpression', () => {
-      $.CONSUME(StringLiteral);
+      $.CONSUME(stringLiteral);
     });
 
     this.performSelfAnalysis();

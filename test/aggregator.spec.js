@@ -1,10 +1,12 @@
+'use strict';
+
 const { expect } = require('chai');
 const Period = require('../src/lib/period/period');
 
 describe('The Aggregator Grammar', () => {
   const period = Period.create([
-    {date: '2017-08-15', campaigns: { email: { open: 3 }}},
-    {date: '2017-08-16', campaigns: { email: { open: 4 }}}
+    { date: '2017-08-15', campaigns: { email: { open: 3 } } },
+    { date: '2017-08-16', campaigns: { email: { open: 4 } } }
   ]);
 
   const aggregate = require('../src/aggregator')(period);
@@ -99,7 +101,7 @@ describe('The Aggregator Grammar', () => {
       it('has a higher precedence than the minus operator', () => {
         expect(aggregate('9 - 3 / 3').value).to.eql(8);
       });
-    })
+    });
   });
 
 
@@ -120,15 +122,15 @@ describe('The Aggregator Grammar', () => {
     });
 
     it('throws an exception when there are mismatched parentheses', () => {
-      expect(() => aggregate('(1 + 2)(')).to.throw('Error parsing "(1 + 2)("')
+      expect(() => aggregate('(1 + 2)(')).to.throw('Error parsing "(1 + 2)("');
     });
 
     it('does not allow parens between unary operator and operand', () => {
-      expect(() => aggregate('LAST(campaigns)')).to.throw('Error parsing "LAST(campaigns)"')
+      expect(() => aggregate('LAST(campaigns)')).to.throw('Error parsing "LAST(campaigns)"');
     });
 
     it('throws an exception when a unary operation has no argument', () => {
       expect(() => aggregate('LAST + 2')).to.throw('Error parsing "LAST + 2"');
-    })
-  })
+    });
+  });
 });

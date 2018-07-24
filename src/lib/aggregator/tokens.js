@@ -2,86 +2,86 @@
 
 const { createToken, Lexer } = require('chevrotain');
 
-const LastOperator = createToken({
-  name: 'LastOperator',
+const lastOperator = createToken({
+  name: 'lastOperator',
   pattern: /LAST/
 });
 
-const SumOperator = createToken({
-  name: 'SumOperator',
+const sumOperator = createToken({
+  name: 'sumOperator',
   pattern: /SUM/
 });
 
-const AverageOperator = createToken({
-  name: 'AverageOperator',
+const averageOperator = createToken({
+  name: 'averageOperator',
   pattern: /AVERAGE/
 });
 
-const LengthConstant = createToken({
-  name: 'LengthConstant',
+const lengthConstant = createToken({
+  name: 'lengthConstant',
   pattern: /LENGTH/
 });
 
-const PlusOperator = createToken({
-  name: 'PlusOperator',
+const plusOperator = createToken({
+  name: 'plusOperator',
   pattern: /\+/
 });
 
-const MinusOperator = createToken({
-  name: 'MinusOperator',
+const minusOperator = createToken({
+  name: 'minusOperator',
   pattern: /\-/
 });
 
-const MultiplicationOperator = createToken({
-  name: 'MultiplicationOperator',
+const multiplicationOperator = createToken({
+  name: 'multiplicationOperator',
   pattern: /\*/
 });
 
-const DivisionOperator = createToken({
-  name: 'DivisionOperator',
+const divisionOperator = createToken({
+  name: 'divisionOperator',
   pattern: /\//
 });
 
-const OpeningParen = createToken({
-  name: 'OpeningParen',
+const openingParen = createToken({
+  name: 'openingParen',
   pattern: '\('
 });
 
-const ClosingParen = createToken({
-  name: 'ClosingParen',
+const closingParen = createToken({
+  name: 'closingParen',
   pattern: '\)'
 });
 
-const WhiteSpace = createToken({
-  name: 'WhiteSpace',
+const whiteSpace = createToken({
+  name: 'whiteSpace',
   pattern: /\s+/,
   group: Lexer.SKIPPED
 });
 
-const StringLiteral = createToken({
-  name: 'StringLiteral',
+const stringLiteral = createToken({
+  name: 'stringLiteral',
   pattern: /[\w\.]+/
 });
 
-const NumberLiteral = createToken({
-  name: 'NumberLiteral',
+const numberLiteral = createToken({
+  name: 'numberLiteral',
   pattern: /[1-9]\d*/
 });
 
 const allTokens = [
-  WhiteSpace,
-  LastOperator,
-  SumOperator,
-  AverageOperator,
-  LengthConstant,
-  PlusOperator,
-  MinusOperator,
-  MultiplicationOperator,
-  DivisionOperator,
-  OpeningParen,
-  ClosingParen,
-  NumberLiteral,
-  StringLiteral
+  whiteSpace,
+  lastOperator,
+  sumOperator,
+  averageOperator,
+  lengthConstant,
+  plusOperator,
+  minusOperator,
+  multiplicationOperator,
+  divisionOperator,
+  openingParen,
+  closingParen,
+  numberLiteral,
+  stringLiteral
 ];
 
 module.exports = { allTokens };

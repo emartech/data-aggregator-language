@@ -34,28 +34,28 @@ module.exports = (parser) => {
       return this.visit(ctx.additionExpression);
     }
 
-    averageOperation(ctx) {
+    averageExpression(ctx) {
       return this._period.average(this.visit(ctx.stringExpression));
     }
 
-    sumOperation(ctx) {
+    sumExpression(ctx) {
       return this._period.sum(this.visit(ctx.stringExpression));
     }
 
-    lastOperation(ctx) {
+    lastExpression(ctx) {
       return this._period.last(this.visit(ctx.stringExpression));
     }
 
-    lengthConstant() {
+    lengthExpression() {
       return this._period.length;
     }
 
     numberExpression(ctx) {
-      return parseInt(ctx.NumberLiteral[0].image);
+      return parseInt(ctx.numberLiteral[0].image);
     }
 
     stringExpression(ctx) {
-      return ctx.StringLiteral[0].image;
+      return ctx.stringLiteral[0].image;
     }
 
     _accumulateAdditiveRhs(rhs) {
@@ -68,7 +68,7 @@ module.exports = (parser) => {
 
     _accumulateRhs(rhs, init, accumulateOperation) {
       if (rhs) {
-        return rhs.reduce(accumulateOperation, init)
+        return rhs.reduce(accumulateOperation, init);
       }
       return init;
     }
