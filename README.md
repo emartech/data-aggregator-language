@@ -30,7 +30,7 @@ const aggregator = require('@emartech/data-aggregator-language')(input);
 const result = aggregator('SUM reservations.silver').value
 ```
 
-# Supported Syntax In Aggregation Expressions
+# Supported Syntax in Aggregation Expressions
 
 Examples below are for the `input` defined above.
 ## Constants
