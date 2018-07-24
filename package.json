@@ -1,9 +1,9 @@
 {
   "name": "@emartech/data-aggregator-language",
-  "version": "1.0.0",
   "description": "Execute aggregation expressions on a given data set.",
   "main": "index.js",
   "scripts": {
+    "semantic-release": "semantic-release",
     "test": "npm run test:style && npm run test:unit",
     "test:unit": "mocha ./test/**/*.spec.js",
     "test:style": "eslint --fix --ext .js src test"
@@ -16,9 +16,14 @@
   },
   "devDependencies": {
     "chai": "4.1.2",
-    "mocha": "5.2.0",
     "eslint": "5.1.0",
     "eslint-config-emarsys": "5.1.0",
-    "eslint-plugin-require-path-exists": "1.1.7"
+    "eslint-plugin-require-path-exists": "1.1.7",
+    "mocha": "5.2.0",
+    "semantic-release": "^15.8.1"
+  },
+  "engines": {
+    "node": "8.11.3",
+    "npm": "6.2.0"
   }
 }
