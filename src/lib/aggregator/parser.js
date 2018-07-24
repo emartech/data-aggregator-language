@@ -1,9 +1,10 @@
 'use strict';
 
 const { Parser } = require('chevrotain');
-const { tokens, allTokens } = require('./tokens');
+const { allTokens } = require('./tokens');
 
-const {
+const [
+  _,
   LastOperator,
   SumOperator,
   AverageOperator,
@@ -14,9 +15,9 @@ const {
   DivisionOperator,
   OpeningParen,
   ClosingParen,
-  StringLiteral,
-  NumberLiteral
-} = tokens;
+  NumberLiteral,
+  StringLiteral
+] = allTokens;
 
 class AggregatorParser extends Parser {
   constructor(input) {

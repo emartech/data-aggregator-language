@@ -84,23 +84,4 @@ const allTokens = [
   StringLiteral
 ];
 
-const tokens = {
-  WhiteSpace,
-  LastOperator,
-  SumOperator,
-  AverageOperator,
-  LengthConstant,
-  PlusOperator,
-  MinusOperator,
-  MultiplicationOperator,
-  DivisionOperator,
-  OpeningParen,
-  ClosingParen,
-  NumberLiteral,
-  StringLiteral
-};
-
-module.exports = {
-  allTokens,
-  tokens
-};
+module.exports = { allTokens };
