@@ -27,7 +27,7 @@ For example,
 # Usage
 ```js
 const aggregator = require('@emartech/data-aggregator-language')(input);
-const result = aggregator('SUM reservations.silver').value
+const result = aggregator('SUM reservations.silver')
 ```
 
 # Supported Syntax in Aggregation Expressions

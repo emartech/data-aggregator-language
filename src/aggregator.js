@@ -23,9 +23,5 @@ module.exports = (period) => (text) => {
     throw new Error([`Error parsing "${text}"\n`] + parser.errors);
   }
 
-  return {
-    value: value,
-    lexResult: lexResult,
-    parseErrors: parser.errors
-  };
+  return value;
 };
