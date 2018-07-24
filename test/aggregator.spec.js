@@ -116,7 +116,15 @@ describe('The Aggregator Grammar', () => {
 
   describe('when there is a parsing error', () => {
     it('throws an exception', () => {
-      expect(() => aggregate('INVALID_TOKEN')).to.throw();
+      expect(() => aggregate('INVALID_TOKEN')).to.throw('Error parsing "INVALID_TOKEN"');
     });
+
+    it('throws an exception when there are mismatched parentheses', () => {
+      expect(() => aggregate('(1 + 2)(')).to.throw('Error parsing "(1 + 2)("')
+    });
+
+    it('throws an exception when a', () => {
+      expect(() => aggregate('LAST + 2')).to.throw('Error parsing "LAST + 2"');
+    })
   })
 });
