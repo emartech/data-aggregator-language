@@ -5,8 +5,8 @@ const subject = require('../src/aggregator');
 
 describe('The Aggregator Grammar', () => {
   const input = [
-    { date: '2017-08-15', campaigns: { email: { open: 3 }, values: [4, 10, 2] } },
-    { date: '2017-08-16', campaigns: { email: { open: 4 }, values: [2, 9] } }
+    { date: '2017-08-15', campaigns: { email: { open: 3 }, values_for_test: [4, 10, 2] } },
+    { date: '2017-08-16', campaigns: { email: { open: 4 }, values_for_test: [2, 9] } }
   ];
   const aggregate = subject(input);
 
@@ -115,8 +115,8 @@ describe('The Aggregator Grammar', () => {
   });
 
   describe('string literal', () => {
-    it('can contain []\'s', () => {
-      expect(aggregate('LAST campaigns.values[1]')).to.eql(9);
+    it('can contain []\'s, _\'s', () => {
+      expect(aggregate('LAST campaigns.values_for_test[1]')).to.eql(9);
     });
   });
 
