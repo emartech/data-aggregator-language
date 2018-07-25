@@ -1,13 +1,14 @@
 'use strict';
 
 const { expect } = require('chai');
+const subject = require('../src/aggregator');
 
 describe('The Aggregator Grammar', () => {
   const input = [
-    { date: '2017-08-15', campaigns: { email: { open: 3 } } },
-    { date: '2017-08-16', campaigns: { email: { open: 4 } } }
+    { date: '2017-08-15', campaigns: { email: { open: 3 }, values: [4, 10, 2] } },
+    { date: '2017-08-16', campaigns: { email: { open: 4 }, values: [2, 9] } }
   ];
-  const aggregate = require('../src/aggregator')(input);
+  const aggregate = subject(input);
 
   describe('Binary Operands', () => {
     it('has a last operator', () => {
@@ -110,6 +111,12 @@ describe('The Aggregator Grammar', () => {
 
     it('can be placed around any number expression', () => {
       expect(aggregate('(((123)))')).to.eql(123);
+    });
+  });
+
+  describe('string literal', () => {
+    it('can contain []\'s', () => {
+      expect(aggregate('LAST campaigns.values[1]')).to.eql(9);
     });
   });
 

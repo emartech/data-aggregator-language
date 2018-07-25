@@ -60,7 +60,7 @@ const whiteSpace = createToken({
 
 const stringLiteral = createToken({
   name: 'stringLiteral',
-  pattern: /[\w\.]+/
+  pattern: /[\w\.\[\]]+/
 });
 
 const numberLiteral = createToken({
