@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Token Names" type="mocha-javascript-test-runner" factoryName="Mocha" nameIsGenerated="true">
+    <node-interpreter>project</node-interpreter>
+    <node-options />
+    <working-directory>$PROJECT_DIR$</working-directory>
+    <pass-parent-env>true</pass-parent-env>
+    <ui>bdd</ui>
+    <extra-mocha-options>test/setup-tests</extra-mocha-options>
+    <test-kind>SUITE</test-kind>
+    <test-file>$PROJECT_DIR$/src/lib/token-names/index.spec.js</test-file>
+    <test-names>
+      <name value="Token Names" />
+    </test-names>
+    <method />
+  </configuration>
+</component>
