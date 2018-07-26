@@ -3,11 +3,11 @@
 const { Lexer } = require('chevrotain');
 
 const AggregatorParser = require('./lib/aggregator/parser');
-const { allTokens } = require('./lib/aggregator/tokens');
+const { tokens } = require('./lib/aggregator/tokens');
 const interpreterFactory = require('./lib/aggregator/interpreter');
 const Period = require('../src/lib/period/period');
 
-const CalculatorLexer = new Lexer(allTokens);
+const CalculatorLexer = new Lexer(tokens);
 const parser = new AggregatorParser([]);
 const AggregatorInterpreter = interpreterFactory(parser);
 

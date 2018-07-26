@@ -68,7 +68,7 @@ const numberLiteral = createToken({
   pattern: /[1-9]\d*/
 });
 
-const allTokens = [
+const tokens = [
   whiteSpace,
   lastOperator,
   sumOperator,
@@ -84,4 +84,4 @@ const allTokens = [
   stringLiteral
 ];
 
-module.exports = { allTokens };
+module.exports = { tokens };

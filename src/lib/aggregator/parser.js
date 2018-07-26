@@ -3,7 +3,7 @@
 /* eslint new-cap: 0 */
 
 const { Parser } = require('chevrotain');
-const { allTokens } = require('./tokens');
+const { tokens } = require('./tokens');
 
 const [
   /* eslint-disable-next-line no-unused-vars */
@@ -20,11 +20,11 @@ const [
   closingParen,
   numberLiteral,
   stringLiteral
-] = allTokens;
+] = tokens;
 
 class AggregatorParser extends Parser {
   constructor(input) {
-    super(input, allTokens, { outputCst: true });
+    super(input, tokens, { outputCst: true });
 
     /* eslint-disable-next-line consistent-this */
     const $ = this;
