@@ -53,6 +53,31 @@ Examples below are for the `input` defined above.
 
 For example, `(LAST reservations.silver + 3) * 2 / 2` (yields 6)
 
+# Using with Webpack
+Because of the [way the underlying Chevrotain library is implemented](https://github.com/SAP/chevrotain/blob/master/examples/parser/minification/README.md), name mangling
+interferes with the parser's operation. To resolve this issue, webpacked host projects need to disable name mangling for the token names used in this grammar.
+
+To help with this, the module exports these names in a `tokens` array.
+
+To configure webpack, include the following in your `webpack.config.js`:
+```js
+const { tokens } = require('@emartech/data-aggregator-language');
+
+\\ other config
+
+module.exports.optimization = {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          mangle: {
+            reserved: tokens
+          }
+        }
+      })
+    ]
+  };
+```
+
 # Commit Convention
 Semantic release depends on the [Angular commit message conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153). Please follow these.
 
