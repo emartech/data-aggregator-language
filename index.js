@@ -1,9 +1,8 @@
-const chevrotain = require('chevrotain');
-
 const aggregator = require('./src/aggregator');
-const { tokens } = require('./src/lib/aggregator/tokens');
+const { tokens } = require('./src/aggregator/tokens');
+const tokenNames = require('./src/lib/token-names');
 
 module.exports = {
   aggregator,
-  tokens: tokens.map(currTok => chevrotain.tokenName(currTok))
+  tokens: tokenNames(tokens)
 };

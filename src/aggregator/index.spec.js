@@ -1,7 +1,6 @@
 'use strict';
 
-const { expect } = require('chai');
-const subject = require('../src/aggregator');
+const subject = require('./index');
 
 describe('The Aggregator Grammar', () => {
   const input = [

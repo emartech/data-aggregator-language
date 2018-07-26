@@ -5,7 +5,7 @@
   "scripts": {
     "semantic-release": "semantic-release",
     "test": "npm run test:style && npm run test:unit",
-    "test:unit": "mocha ./test/**/*.spec.js",
+    "test:unit": "mocha ./test/setup-tests.js ./**/*.spec.js",
     "test:style": "eslint --fix --ext .js src test"
   },
   "author": "Emarsys",

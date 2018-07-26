@@ -2,10 +2,10 @@
 
 const { Lexer } = require('chevrotain');
 
-const AggregatorParser = require('./lib/aggregator/parser');
-const { tokens } = require('./lib/aggregator/tokens');
-const interpreterFactory = require('./lib/aggregator/interpreter');
-const Period = require('../src/lib/period/period');
+const AggregatorParser = require('./parser');
+const { tokens } = require('./tokens');
+const interpreterFactory = require('./interpreter');
+const Period = require('../lib/period/period');
 
 
 const evaluate = (lexer, parser, interpreter) => (text) => {
@@ -20,7 +20,7 @@ const evaluate = (lexer, parser, interpreter) => (text) => {
 };
 
 let assertParsingSuccessful = function(parser, text) {
-  if(parser.errors.length > 0) {
+  if (parser.errors.length > 0) {
     throw new Error([`Error parsing "${text}"\n`] + parser.errors);
   }
 };
