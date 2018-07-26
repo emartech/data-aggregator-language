@@ -7,11 +7,11 @@ const { allTokens } = require('./lib/aggregator/tokens');
 const interpreterFactory = require('./lib/aggregator/interpreter');
 const Period = require('../src/lib/period/period');
 
-module.exports = (input) => (text) => {
-  const CalculatorLexer = new Lexer(allTokens);
-  const parser = new AggregatorParser([]);
+const CalculatorLexer = new Lexer(allTokens);
+const parser = new AggregatorParser([]);
+const AggregatorInterpreter = interpreterFactory(parser);
 
-  const AggregatorInterpreter = interpreterFactory(parser);
+module.exports = (input) => (text) => {
   const interpreter = new AggregatorInterpreter(Period.create(input));
   const lexResult = CalculatorLexer.tokenize(text);
 
