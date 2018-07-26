@@ -1,4 +1,4 @@
-# Data Aggregator
+# Data Aggregator Language
 
 Execute aggregation expressions on a given data set.
 
