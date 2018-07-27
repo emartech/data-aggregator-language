@@ -3,11 +3,14 @@
 const subject = require('./index');
 
 describe('The Aggregator Grammar', () => {
-  const input = [
-    { date: '2017-08-15', campaigns: { email: { open: 3 }, values_for_test: [4, 10, 2] } },
-    { date: '2017-08-16', campaigns: { email: { open: 4 }, values_for_test: [2, 9] } }
-  ];
-  const aggregate = subject(input);
+  let aggregate;
+
+  before(() => {
+    aggregate = subject([
+      { date: '2017-08-15', campaigns: { email: { open: 3 }, values_for_test: [4, 10, 2] } },
+      { date: '2017-08-16', campaigns: { email: { open: 4 }, values_for_test: [2, 9] } }
+    ]);
+  });
 
   describe('Binary Operands', () => {
     it('has a last operator', () => {
@@ -32,7 +35,7 @@ describe('The Aggregator Grammar', () => {
 
     it('works for floating point numbers', () => {
       expect(aggregate('0.5')).to.eql(0.5);
-    })
+    });
   });
 
   describe('Binary Operators', () => {
