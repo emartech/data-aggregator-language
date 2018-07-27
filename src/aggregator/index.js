@@ -8,7 +8,7 @@ const interpreterFactory = require('./interpreter');
 const Period = require('../lib/period/period');
 
 
-const evaluate = (lexer, parser, interpreter) => (text) => {
+const createAggregator = (lexer, parser, interpreter) => (text) => {
   const lexResult = lexer.tokenize(text);
   parser.input = lexResult.tokens;
   const cst = parser.additionExpression();
@@ -30,8 +30,8 @@ let assertParsingSuccessful = function(parser, text) {
   const parser = new AggregatorParser([]);
   const AggregatorInterpreter = interpreterFactory(parser);
 
-  module.exports = (input) => (text) => {
+  module.exports = (input) => {
     const interpreter = new AggregatorInterpreter(Period.create(input));
-    return evaluate(lexer, parser, interpreter)(text);
+    return createAggregator(lexer, parser, interpreter);
   };
 })();
