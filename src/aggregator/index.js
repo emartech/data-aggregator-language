@@ -5,12 +5,9 @@ const { Lexer } = require('chevrotain');
 const AggregatorParser = require('./parser');
 const { tokens } = require('./tokens');
 const interpreterFactory = require('./interpreter');
-const Period = require('../lib/period/period');
-
 
 const createAggregator = (lexer, parser, interpreter) => (text) => {
-  const lexResult = lexer.tokenize(text);
-  parser.input = lexResult.tokens;
+  parser.input = lexer.tokenize(text).tokens;
   const cst = parser.additionExpression();
   const value = interpreter.visit(cst);
 
@@ -29,9 +26,10 @@ let assertParsingSuccessful = function(parser, text) {
   const lexer = new Lexer(tokens);
   const parser = new AggregatorParser([]);
   const AggregatorInterpreter = interpreterFactory(parser);
+  const interpreter = new AggregatorInterpreter();
 
   module.exports = (input) => {
-    const interpreter = new AggregatorInterpreter(Period.create(input));
+    interpreter.period = input;
     return createAggregator(lexer, parser, interpreter);
   };
 })();

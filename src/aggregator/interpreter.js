@@ -1,13 +1,19 @@
 'use strict';
 
+const Period = require('../lib/period/period');
+
 module.exports = (parser) => {
   const BaseCstVisitor = parser.getBaseCstVisitorConstructor();
 
   class AggregatorInterpreter extends BaseCstVisitor {
-    constructor(period) {
+    constructor() {
       super();
-      this._period = period;
+      this._period = null;
       this.validateVisitor();
+    }
+
+    set period(period) {
+      this._period = Period.create(period);
     }
 
     additionExpression(ctx) {
