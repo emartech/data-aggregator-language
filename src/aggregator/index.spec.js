@@ -29,6 +29,10 @@ describe('The Aggregator Grammar', () => {
     it('has a rule for number literals', () => {
       expect(aggregate('1')).to.eql(1);
     });
+
+    it('works for floating point numbers', () => {
+      expect(aggregate('0.5')).to.eql(0.5);
+    })
   });
 
   describe('Binary Operators', () => {
@@ -98,6 +102,14 @@ describe('The Aggregator Grammar', () => {
 
       it('has a higher precedence than the minus operator', () => {
         expect(aggregate('9 - 3 / 3')).to.eql(8);
+      });
+
+      it('yields accurate floating point results for all-number expressions', () => {
+        expect(aggregate('5 / 2')).to.eql(2.5);
+      });
+
+      it('yields accurate floating point results when an operand is an aggregation expression', () => {
+        expect(aggregate('LAST campaigns.email.open / 8')).to.eql(0.5);
       });
     });
   });

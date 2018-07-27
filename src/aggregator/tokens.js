@@ -65,7 +65,7 @@ const stringLiteral = createToken({
 
 const numberLiteral = createToken({
   name: 'numberLiteral',
-  pattern: /[1-9]\d*/
+  pattern: /[0-9\.]+/
 });
 
 const tokens = [

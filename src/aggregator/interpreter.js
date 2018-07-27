@@ -51,7 +51,7 @@ module.exports = (parser) => {
     }
 
     numberExpression(ctx) {
-      return parseInt(ctx.numberLiteral[0].image);
+      return parseFloat(ctx.numberLiteral[0].image);
     }
 
     stringExpression(ctx) {
