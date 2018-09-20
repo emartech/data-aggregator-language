@@ -160,6 +160,14 @@ describe('The Aggregator Grammar', () => {
     });
   });
 
+  describe('Logical Operators', () => {
+    describe('Not Operator', function() {
+      it('works', function() {
+        expect(aggregate('NOT EMPTY UNION programs.users')).to.eql(false);
+      });
+    });
+  });
+
   describe('when there is a parsing error', () => {
     it('throws an exception', () => {
       expect(() => aggregate('INVALID_TOKEN')).to.throw('Error parsing "INVALID_TOKEN"');

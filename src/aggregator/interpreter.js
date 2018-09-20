@@ -32,6 +32,10 @@ module.exports = (parser) => {
       return this._isEmpty(this.visit(ctx.unionExpression));
     }
 
+    notExpression(ctx) {
+      return !this.visit(ctx.emptyExpression);
+    }
+
     additionExpression(ctx) {
       return this.visit(ctx.lhs) + this._accumulateAdditiveRhs(ctx.rhs);
     }
