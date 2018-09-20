@@ -11,6 +11,7 @@ const [
   lastOperator,
   sumOperator,
   averageOperator,
+  emptyOperator,
   unionOperator,
   lengthConstant,
   plusOperator,
@@ -38,12 +39,20 @@ class AggregatorParser extends Parser {
     });
 
     $.RULE('setOperationExpression', () => {
-      $.SUBRULE($.unionExpression, { LABEL: 'expression' });
+      $.OR([
+        { ALT: () => $.SUBRULE($.unionExpression, { LABEL: 'expression' }) },
+        { ALT: () => $.SUBRULE($.emptyExpression, { LABEL: 'expression' }) }
+      ]);
     });
 
     $.RULE('unionExpression', () => {
       $.CONSUME(unionOperator);
       $.SUBRULE($.stringExpression);
+    });
+
+    $.RULE('emptyExpression', () => {
+      $.CONSUME(emptyOperator);
+      $.SUBRULE($.unionExpression);
     });
 
     $.RULE('additionExpression', () => {

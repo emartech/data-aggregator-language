@@ -28,6 +28,10 @@ module.exports = (parser) => {
       return this._period.union(this.visit(ctx.stringExpression));
     }
 
+    emptyExpression(ctx) {
+      return this._isEmpty(this.visit(ctx.unionExpression));
+    }
+
     additionExpression(ctx) {
       return this.visit(ctx.lhs) + this._accumulateAdditiveRhs(ctx.rhs);
     }
@@ -89,6 +93,10 @@ module.exports = (parser) => {
         return rhs.reduce(accumulateOperation, init);
       }
       return init;
+    }
+
+    _isEmpty(array) {
+      return array.length === 0;
     }
   }
 

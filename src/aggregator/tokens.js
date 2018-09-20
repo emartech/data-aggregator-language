@@ -27,6 +27,11 @@ const unionOperator = createToken({
   pattern: /UNION/
 });
 
+const emptyOperator = createToken({
+  name: 'emptyOperator',
+  pattern: /EMPTY/
+});
+
 const plusOperator = createToken({
   name: 'plusOperator',
   pattern: /\+/
@@ -78,6 +83,7 @@ const tokens = [
   lastOperator,
   sumOperator,
   averageOperator,
+  emptyOperator,
   unionOperator,
   lengthConstant,
   plusOperator,

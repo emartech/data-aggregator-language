@@ -10,12 +10,12 @@ describe('The Aggregator Grammar', () => {
       {
         date: '2017-08-15',
         campaigns: { email: { open: 3 }, values_for_test: [4, 10, 2] },
-        programs: { ids: ['1', '2'] }
+        programs: { ids: ['1', '2'], users: [] }
       },
       {
         date: '2017-08-16',
         campaigns: { email: { open: 4 }, values_for_test: [2, 9] },
-        programs: { ids: ['2', '3', '4'] }
+        programs: { ids: ['2', '3', '4'], users: [] }
       }
     ]);
   });
@@ -146,6 +146,16 @@ describe('The Aggregator Grammar', () => {
     describe('Union Operator', () => {
       it('exists', () => {
         expect(aggregate('UNION programs.ids')).to.deep.eql(['1', '2', '3', '4']);
+      });
+    });
+
+    describe('Empty Operator', () => {
+      it('works for non-empty arrays', () => {
+        expect(aggregate('EMPTY UNION programs.ids')).to.eql(false);
+      });
+
+      it('works for empty array', () => {
+        expect(aggregate('EMPTY UNION programs.users')).to.eql(true);
       });
     });
   });
