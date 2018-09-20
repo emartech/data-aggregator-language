@@ -36,14 +36,16 @@ const result = aggregator('SUM reservations.silver')
 
 Examples below are for the `input` defined above.
 
-### Constants
+### Number Results
+
+#### Constants
 * LENGTH
   * `LENGTH` (yields 2)
   * `LENGTH + 3` (yields 5)
 * Any number literal
   * `5` (yields 5)
 
-### Unary Operators
+#### Unary Operators
 * SUM
   * `SUM reservations.silver` (yields 15)
 * LAST
@@ -51,14 +53,22 @@ Examples below are for the `input` defined above.
 * AVERAGE
   * `AVERAGE reservations.silver` (yields 7.5)
 
-### Binary Operators
+#### Binary Operators
 +, -, *, /
 For example, `(LAST reservations.silver + 3) * 2 / 2` (yields 6)
 
-### Set Operators
-Set Operators may not be mixed with any of the other operators.
+
+### Array Results
 * UNION
   * `UNION customers` (yields ['brad', 'angelina'])
+
+### Boolean Results
+
+* EMPTY
+  * `EMPTY UNION customers` (yields false)
+* NOT
+  * `NOT EMPTY UNION customers` (yields true)
+
 
 ## Using with Webpack
 Because of the [way the underlying Chevrotain library is implemented](https://github.com/SAP/chevrotain/blob/master/examples/parser/minification/README.md), name mangling

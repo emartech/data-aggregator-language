@@ -20,7 +20,7 @@ module.exports = (parser) => {
       return this.visit(ctx.expression);
     }
 
-    setOperationExpression(ctx) {
+    arrayExpression(ctx) {
       return this.visit(ctx.expression);
     }
 
@@ -28,12 +28,12 @@ module.exports = (parser) => {
       return this._period.union(this.visit(ctx.stringExpression));
     }
 
-    emptyExpression(ctx) {
-      return this._isEmpty(this.visit(ctx.unionExpression));
+    notExpression(ctx) {
+      return this._accumulateNot(ctx.notOperator, this.visit(ctx.emptyExpression));
     }
 
-    notExpression(ctx) {
-      return !this.visit(ctx.emptyExpression);
+    emptyExpression(ctx) {
+      return this._isEmpty(this.visit(ctx.arrayExpression));
     }
 
     additionExpression(ctx) {
@@ -90,6 +90,13 @@ module.exports = (parser) => {
 
     _accumulateMultiplicativeRhs(rhs) {
       return this._accumulateRhs(rhs, 1, (accumulator, current) => accumulator * this.visit(current));
+    }
+
+    _accumulateNot(operators, bool) {
+      if (operators) {
+        return operators.reduce(accumulator => !accumulator, bool);
+      }
+      return bool;
     }
 
     _accumulateRhs(rhs, init, accumulateOperation) {

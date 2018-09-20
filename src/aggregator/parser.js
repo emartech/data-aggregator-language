@@ -34,17 +34,14 @@ class AggregatorParser extends Parser {
 
     $.RULE('expression', () => {
       $.OR([
-        { ALT: () => $.SUBRULE($.additionExpression, { LABEL: 'expression' }) },
-        { ALT: () => $.SUBRULE($.setOperationExpression, { LABEL: 'expression' }) }
+        { ALT: () => $.SUBRULE($.arrayExpression, { LABEL: 'expression' }) },
+        { ALT: () => $.SUBRULE($.notExpression, { LABEL: 'expression' }) },
+        { ALT: () => $.SUBRULE($.additionExpression, { LABEL: 'expression' }) }
       ]);
     });
 
-    $.RULE('setOperationExpression', () => {
-      $.OR([
-        { ALT: () => $.SUBRULE($.unionExpression, { LABEL: 'expression' }) },
-        { ALT: () => $.SUBRULE($.emptyExpression, { LABEL: 'expression' }) },
-        { ALT: () => $.SUBRULE($.notExpression, { LABEL: 'expression' }) }
-      ]);
+    $.RULE('arrayExpression', () => {
+      $.SUBRULE($.unionExpression, { LABEL: 'expression' });
     });
 
     $.RULE('unionExpression', () => {
@@ -52,14 +49,16 @@ class AggregatorParser extends Parser {
       $.SUBRULE($.stringExpression);
     });
 
-    $.RULE('emptyExpression', () => {
-      $.CONSUME(emptyOperator);
-      $.SUBRULE($.unionExpression);
+    $.RULE('notExpression', () => {
+      $.MANY(() => {
+        $.CONSUME(notOperator);
+      });
+      $.SUBRULE($.emptyExpression);
     });
 
-    $.RULE('notExpression', () => {
-      $.CONSUME(notOperator);
-      $.SUBRULE($.emptyExpression);
+    $.RULE('emptyExpression', () => {
+      $.CONSUME(emptyOperator);
+      $.SUBRULE($.arrayExpression);
     });
 
     $.RULE('additionExpression', () => {
