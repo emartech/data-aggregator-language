@@ -58,7 +58,7 @@ For example, `(LAST reservations.silver + 3) * 2 / 2` (yields 6)
 ### Set Operators
 Set Operators may not be mixed with any of the other operators.
 * UNION
- * `UNION customers` (yields ['brad', 'angelina'])
+  * `UNION customers` (yields ['brad', 'angelina'])
 
 ## Using with Webpack
 Because of the [way the underlying Chevrotain library is implemented](https://github.com/SAP/chevrotain/blob/master/examples/parser/minification/README.md), name mangling
