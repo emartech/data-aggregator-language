@@ -5,18 +5,20 @@ Execute aggregation expressions on a given data set.
 ## What it Does
 Given the following input data structure,
 ```js
-const input = [{ 
+const input = [{
   date: '2017-09-16',
   reservations: {
     silver: 12,
     gold: 5
-  }  
+  },
+  customers: ['brad']
 }, {
   date: '2017-09-17',
   reservations: {
     silver: 3,
     gold: 2
-  }  
+  },
+  customers: ['angelina']
 }]
 ```
 the parser allows mixing aggregation expressions over the input with common arithmetic operators.
@@ -33,8 +35,9 @@ const result = aggregator('SUM reservations.silver')
 ## Supported Syntax in Aggregation Expressions
 
 Examples below are for the `input` defined above.
+
 ### Constants
-* LENGTH 
+* LENGTH
   * `LENGTH` (yields 2)
   * `LENGTH + 3` (yields 5)
 * Any number literal
@@ -50,8 +53,12 @@ Examples below are for the `input` defined above.
 
 ### Binary Operators
 +, -, *, /
-
 For example, `(LAST reservations.silver + 3) * 2 / 2` (yields 6)
+
+### Set Operators
+Set Operators may not be mixed with any of the other operators.
+* UNION
+ * `UNION customers` (yields ['brad', 'angelina'])
 
 ## Using with Webpack
 Because of the [way the underlying Chevrotain library is implemented](https://github.com/SAP/chevrotain/blob/master/examples/parser/minification/README.md), name mangling

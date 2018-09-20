@@ -22,6 +22,11 @@ const lengthConstant = createToken({
   pattern: /LENGTH/
 });
 
+const unionOperator = createToken({
+  name: 'unionOperator',
+  pattern: /UNION/
+});
+
 const plusOperator = createToken({
   name: 'plusOperator',
   pattern: /\+/
@@ -73,6 +78,7 @@ const tokens = [
   lastOperator,
   sumOperator,
   averageOperator,
+  unionOperator,
   lengthConstant,
   plusOperator,
   minusOperator,

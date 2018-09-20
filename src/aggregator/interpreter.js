@@ -16,6 +16,18 @@ module.exports = (parser) => {
       this._period = Period.create(period);
     }
 
+    expression(ctx) {
+      return this.visit(ctx.expression);
+    }
+
+    setOperationExpression(ctx) {
+      return this.visit(ctx.expression);
+    }
+
+    unionExpression(ctx) {
+      return this._period.union(this.visit(ctx.stringExpression));
+    }
+
     additionExpression(ctx) {
       return this.visit(ctx.lhs) + this._accumulateAdditiveRhs(ctx.rhs);
     }

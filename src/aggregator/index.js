@@ -8,7 +8,7 @@ const interpreterFactory = require('./interpreter');
 
 const createAggregator = (lexer, parser, interpreter) => (text) => {
   parser.input = lexer.tokenize(text).tokens;
-  const cst = parser.additionExpression();
+  const cst = parser.expression();
   const value = interpreter.visit(cst);
 
   assertParsingSuccessful(parser, text);

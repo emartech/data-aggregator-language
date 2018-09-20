@@ -11,6 +11,7 @@ const [
   lastOperator,
   sumOperator,
   averageOperator,
+  unionOperator,
   lengthConstant,
   plusOperator,
   minusOperator,
@@ -28,6 +29,22 @@ class AggregatorParser extends Parser {
 
     /* eslint-disable-next-line consistent-this */
     const $ = this;
+
+    $.RULE('expression', () => {
+      $.OR([
+        { ALT: () => $.SUBRULE($.additionExpression, { LABEL: 'expression' }) },
+        { ALT: () => $.SUBRULE($.setOperationExpression, { LABEL: 'expression' }) }
+      ]);
+    });
+
+    $.RULE('setOperationExpression', () => {
+      $.SUBRULE($.unionExpression, { LABEL: 'expression' });
+    });
+
+    $.RULE('unionExpression', () => {
+      $.CONSUME(unionOperator);
+      $.SUBRULE($.stringExpression);
+    });
 
     $.RULE('additionExpression', () => {
       $.SUBRULE($.minusExpression, { LABEL: 'lhs' });

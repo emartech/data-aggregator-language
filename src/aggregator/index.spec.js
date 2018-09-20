@@ -7,8 +7,16 @@ describe('The Aggregator Grammar', () => {
 
   before(() => {
     aggregate = subject([
-      { date: '2017-08-15', campaigns: { email: { open: 3 }, values_for_test: [4, 10, 2] } },
-      { date: '2017-08-16', campaigns: { email: { open: 4 }, values_for_test: [2, 9] } }
+      {
+        date: '2017-08-15',
+        campaigns: { email: { open: 3 }, values_for_test: [4, 10, 2] },
+        programs: { ids: ['1', '2'] }
+      },
+      {
+        date: '2017-08-16',
+        campaigns: { email: { open: 4 }, values_for_test: [2, 9] },
+        programs: { ids: ['2', '3', '4'] }
+      }
     ]);
   });
 
@@ -134,6 +142,13 @@ describe('The Aggregator Grammar', () => {
     });
   });
 
+  describe('Set Operators', () => {
+    describe('Union Operator', () => {
+      it('exists', () => {
+        expect(aggregate('UNION programs.ids')).to.deep.eql(['1', '2', '3', '4']);
+      });
+    });
+  });
 
   describe('when there is a parsing error', () => {
     it('throws an exception', () => {
