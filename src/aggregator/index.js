@@ -22,14 +22,12 @@ let assertParsingSuccessful = function(parser, text) {
   }
 };
 
-(() => {
-  const lexer = new Lexer(tokens);
-  const parser = new AggregatorParser([]);
-  const AggregatorInterpreter = interpreterFactory(parser);
-  const interpreter = new AggregatorInterpreter();
+const lexer = new Lexer(tokens);
+const parser = new AggregatorParser();
+const AggregatorInterpreter = interpreterFactory(parser);
+const interpreter = new AggregatorInterpreter();
 
-  module.exports = (input) => {
-    interpreter.period = input;
-    return createAggregator(lexer, parser, interpreter);
-  };
-})();
+module.exports = (input) => {
+  interpreter.period = input;
+  return createAggregator(lexer, parser, interpreter);
+};

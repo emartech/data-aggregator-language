@@ -26,8 +26,8 @@ const [
 ] = tokens;
 
 class AggregatorParser extends Parser {
-  constructor(input) {
-    super(input, tokens, { outputCst: true });
+  constructor() {
+    super(tokens, { outputCst: true });
 
     /* eslint-disable-next-line consistent-this */
     const $ = this;
