@@ -37,7 +37,7 @@ class Period {
   }
 
   union(propertyName) {
-    return this._data.map(propertyName).flatten().uniq().value();
+    return this._data.map(propertyName).reject(x => typeof(x) === 'undefined').flatten().uniq().value();
   }
 
   get empty() {

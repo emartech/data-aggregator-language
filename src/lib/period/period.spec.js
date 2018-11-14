@@ -51,5 +51,14 @@ describe('Period', function() {
       }];
       expect(Period.create(data).union('data.set')).to.eql(['1', '2', '3']);
     });
+
+    it('returns empty array for non-existent property names', function() {
+      const data = [
+        {
+          date: '2017-08-19'
+        }
+      ];
+      expect(Period.create(data).union('non.existent.data.set')).to.eql([]);
+    })
   });
 });

@@ -160,6 +160,10 @@ describe('The Aggregator Grammar', () => {
       it('works for empty array', () => {
         expect(aggregate('EMPTY UNION programs.users')).to.eql(true);
       });
+
+      it('works for properties that are not defined', function() {
+        expect(aggregate('EMPTY UNION programs.foo')).to.eql(true);
+      });
     });
 
     describe('Not Operator', function() {
