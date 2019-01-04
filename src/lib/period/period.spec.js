@@ -59,6 +59,6 @@ describe('Period', function() {
         }
       ];
       expect(Period.create(data).union('non.existent.data.set')).to.eql([]);
-    })
+    });
   });
 });
