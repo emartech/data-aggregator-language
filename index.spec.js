@@ -1,3 +1,5 @@
+'use strict';
+
 const dataAggregatorLanguage = require('./');
 
 describe('The Exported Module', () => {
@@ -11,5 +13,5 @@ describe('The Exported Module', () => {
 
   it('exports the a list of token names', () => {
     expect(dataAggregatorLanguage.tokens).to.include('whiteSpace');
-  })
+  });
 });
