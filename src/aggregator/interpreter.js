@@ -61,15 +61,15 @@ module.exports = (parser) => {
     }
 
     averageExpression(ctx) {
-      return this._period.average(this.visit(ctx.stringExpression));
+      return this._period.average(this.visit(ctx.stringExpression)) || null;
     }
 
     sumExpression(ctx) {
-      return this._period.sum(this.visit(ctx.stringExpression));
+      return this._period.sum(this.visit(ctx.stringExpression)) || null;
     }
 
     lastExpression(ctx) {
-      return this._period.last(this.visit(ctx.stringExpression));
+      return this._period.last(this.visit(ctx.stringExpression)) || null;
     }
 
     lengthExpression() {

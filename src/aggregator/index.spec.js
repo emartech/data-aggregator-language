@@ -194,4 +194,19 @@ describe('The Aggregator Grammar', () => {
       expect(() => aggregate('LAST + 2')).to.throw('Error parsing "LAST + 2"');
     });
   });
+
+  context('partially has data', function() {
+    it('works', function() {
+      const periodDataWithMissingValues = [{ date: '2018-03-10', value: 1 }];
+
+      aggregate = subject(periodDataWithMissingValues);
+
+      expect(aggregate('LAST value + LAST otherVal')).to.eql(1);
+      expect(aggregate('SUM value + SUM otherVal')).to.eql(1);
+      expect(aggregate('AVERAGE value + AVERAGE otherVal')).to.eql(1);
+      expect(aggregate('SUM otherVal')).to.eql(0);
+      expect(aggregate('LAST otherVal')).to.eql(0);
+      expect(aggregate('AVERAGE otherVal')).to.eql(0);
+    });
+  });
 });
