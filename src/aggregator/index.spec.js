@@ -193,6 +193,10 @@ describe('The Aggregator Grammar', () => {
     it('throws an exception when a unary operation has no argument', () => {
       expect(() => aggregate('LAST + 2')).to.throw('Error parsing "LAST + 2"');
     });
+
+    it('throws an exception when the operator is lowercase', function() {
+      expect(() => aggregate('last campaigns.email')).to.throw('Error parsing "last campaigns.email"');
+    });
   });
 
   context('partially has data', function() {
