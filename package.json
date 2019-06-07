@@ -11,7 +11,7 @@
   "author": "Emarsys",
   "license": "MIT",
   "dependencies": {
-    "chevrotain": "4.3.2",
+    "chevrotain": "4.6.0",
     "lodash": "4.17.11"
   },
   "devDependencies": {
@@ -19,8 +19,8 @@
     "eslint": "5.16.0",
     "eslint-config-emarsys": "5.1.0",
     "eslint-plugin-require-path-exists": "1.1.9",
-    "mocha": "6.0.2",
-    "semantic-release": "15.13.3"
+    "mocha": "6.1.4",
+    "semantic-release": "15.13.12"
   },
   "engines": {
     "node": "8.12.0",
