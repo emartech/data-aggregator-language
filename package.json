@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "semantic-release": "semantic-release",
-    "test": "npm run test:style && npm run test:unit",
+    "test": "npm run test:unit && npm run test:style",
     "test:unit": "mocha ./test/setup-tests.js ./**/*.spec.js",
     "test:style": "eslint --fix --ext .js src test"
   },

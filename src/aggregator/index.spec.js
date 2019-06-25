@@ -123,6 +123,10 @@ describe('The Aggregator Grammar', () => {
         it('yields accurate floating point results when an operand is an aggregation expression', () => {
           expect(aggregate('LAST campaigns.email.open / 8')).to.eql(0.5);
         });
+
+        it('return NaN if its a division by zero', () => {
+          expect(aggregate('0 / 0')).to.eql(NaN);
+        });
       });
     });
 
