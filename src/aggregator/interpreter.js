@@ -37,35 +37,27 @@ module.exports = (parser) => {
     }
 
     additionExpression(ctx) {
-      let lhs = this.visit(ctx.lhs);
-      if (lhs === null) {
-        return null;
-      }
-      return lhs + this._accumulateAdditiveRhs(ctx.rhs);
+      return this._coalesceNull(ctx, (ctx, lhs) => {
+        return lhs + this._accumulateAdditiveRhs(ctx.rhs);
+      });
     }
 
     minusExpression(ctx) {
-      let lhs = this.visit(ctx.lhs);
-      if (lhs === null) {
-        return null;
-      }
-      return lhs - this._accumulateAdditiveRhs(ctx.rhs);
+      return this._coalesceNull(ctx, (ctx, lhs) => {
+        return lhs - this._accumulateAdditiveRhs(ctx.rhs);
+      });
     }
 
     multiplicationExpression(ctx) {
-      let lhs = this.visit(ctx.lhs);
-      if (lhs === null) {
-        return null;
-      }
-      return lhs * this._accumulateMultiplicativeRhs(ctx.rhs);
+      return this._coalesceNull(ctx, (ctx, lhs) => {
+        return lhs * this._accumulateMultiplicativeRhs(ctx.rhs);
+      });
     }
 
     divisionExpression(ctx) {
-      let lhs = this.visit(ctx.lhs);
-      if (lhs === null) {
-        return null;
-      }
-      return lhs / this._accumulateMultiplicativeRhs(ctx.rhs);
+      return this._coalesceNull(ctx, (ctx, lhs) => {
+        return lhs / this._accumulateMultiplicativeRhs(ctx.rhs);
+      });
     }
 
     binaryOperandExpression(ctx) {
@@ -98,6 +90,14 @@ module.exports = (parser) => {
 
     stringExpression(ctx) {
       return ctx.stringLiteral[0].image;
+    }
+
+    _coalesceNull(ctx, cb) {
+      const lhs = this.visit(ctx.lhs);
+      if (lhs === null) {
+        return null;
+      }
+      return cb(ctx, lhs);
     }
 
     _accumulateAdditiveRhs(rhs) {
