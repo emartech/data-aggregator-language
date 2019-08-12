@@ -94,10 +94,7 @@ module.exports = (parser) => {
 
     _coalesceNull(ctx, cb) {
       const lhs = this.visit(ctx.lhs);
-      if (lhs === null) {
-        return null;
-      }
-      return cb(ctx, lhs);
+      return lhs === null ? null : cb(ctx, lhs);
     }
 
     _accumulateAdditiveRhs(rhs) {
