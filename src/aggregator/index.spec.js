@@ -203,8 +203,8 @@ describe('The Aggregator Grammar', () => {
     });
   });
 
-  context('partially has data', function() {
-    it('works', function() {
+  context('has data for some keys only', function() {
+    it('returns the result when some keys have data', function() {
       const periodDataWithMissingValues = [{ date: '2018-03-10', value: 1 }];
 
       aggregate = subject(periodDataWithMissingValues);
@@ -212,9 +212,18 @@ describe('The Aggregator Grammar', () => {
       expect(aggregate('LAST value + LAST otherVal')).to.eql(1);
       expect(aggregate('SUM value + SUM otherVal')).to.eql(1);
       expect(aggregate('AVERAGE value + AVERAGE otherVal')).to.eql(1);
-      expect(aggregate('SUM otherVal')).to.eql(0);
-      expect(aggregate('LAST otherVal')).to.eql(0);
-      expect(aggregate('AVERAGE otherVal')).to.eql(0);
+    });
+
+    it('returns null when one key has no data', function() {
+      expect(aggregate('SUM otherVal')).to.eql(null);
+      expect(aggregate('LAST otherVal')).to.eql(null);
+      expect(aggregate('AVERAGE otherVal')).to.eql(null);
+    });
+
+    it('returns null when all keys have no data', function() {
+      expect(aggregate('SUM otherVal + SUM someOtherVal')).to.eql(null);
+      expect(aggregate('LAST otherVal + LAST someOtherVal')).to.eql(null);
+      expect(aggregate('AVERAGE otherVal + AVERAGE someOtherVal')).to.eql(null);
     });
   });
 });

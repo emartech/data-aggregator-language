@@ -37,19 +37,35 @@ module.exports = (parser) => {
     }
 
     additionExpression(ctx) {
-      return this.visit(ctx.lhs) + this._accumulateAdditiveRhs(ctx.rhs);
+      let lhs = this.visit(ctx.lhs);
+      if (lhs === null) {
+        return null;
+      }
+      return lhs + this._accumulateAdditiveRhs(ctx.rhs);
     }
 
     minusExpression(ctx) {
-      return this.visit(ctx.lhs) - this._accumulateAdditiveRhs(ctx.rhs);
+      let lhs = this.visit(ctx.lhs);
+      if (lhs === null) {
+        return null;
+      }
+      return lhs - this._accumulateAdditiveRhs(ctx.rhs);
     }
 
     multiplicationExpression(ctx) {
-      return this.visit(ctx.lhs) * this._accumulateMultiplicativeRhs(ctx.rhs);
+      let lhs = this.visit(ctx.lhs);
+      if (lhs === null) {
+        return null;
+      }
+      return lhs * this._accumulateMultiplicativeRhs(ctx.rhs);
     }
 
     divisionExpression(ctx) {
-      return this.visit(ctx.lhs) / this._accumulateMultiplicativeRhs(ctx.rhs);
+      let lhs = this.visit(ctx.lhs);
+      if (lhs === null) {
+        return null;
+      }
+      return lhs / this._accumulateMultiplicativeRhs(ctx.rhs);
     }
 
     binaryOperandExpression(ctx) {
