@@ -11,16 +11,16 @@
   "author": "Emarsys",
   "license": "MIT",
   "dependencies": {
-    "chevrotain": "4.8.1",
-    "lodash": "4.17.11"
+    "chevrotain": "6.4.0",
+    "lodash": "4.17.15"
   },
   "devDependencies": {
     "chai": "4.2.0",
-    "eslint": "6.0.1",
+    "eslint": "6.4.0",
     "eslint-config-emarsys": "5.1.0",
     "eslint-plugin-require-path-exists": "1.1.9",
-    "mocha": "6.1.4",
-    "semantic-release": "15.13.17"
+    "mocha": "6.2.0",
+    "semantic-release": "15.13.24"
   },
   "engines": {
     "node": "10.16.0",
