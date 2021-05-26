@@ -80,7 +80,6 @@ To configure webpack, include the following in your `webpack.config.js`:
 ```js
 const { tokens } = require('@emartech/data-aggregator-language');
 
-// other config
 
 module.exports.optimization = {
     minimizer: [
