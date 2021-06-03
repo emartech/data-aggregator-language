@@ -4,9 +4,10 @@
   "main": "index.js",
   "scripts": {
     "semantic-release": "semantic-release",
-    "test": "npm run test:unit && npm run test:style",
+    "test": "npm run test:unit && npm run code-style:fix",
     "test:unit": "mocha ./test/setup-tests.js ./**/*.spec.js",
-    "test:style": "eslint --fix --ext .js src test"
+    "code-style": "eslint --ext .js src test",
+    "code-style:fix": "eslint --fix --ext .js src test"
   },
   "author": "Emarsys",
   "license": "MIT",
