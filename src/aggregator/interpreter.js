@@ -85,6 +85,9 @@ module.exports = (parser) => {
     }
 
     numberExpression(ctx) {
+      if (ctx.minusOperator) {
+        return parseFloat(ctx.numberLiteral[0].image) * -1;
+      }
       return parseFloat(ctx.numberLiteral[0].image);
     }
 

@@ -75,6 +75,18 @@ describe('The Aggregator Grammar', () => {
         it('chains', () => {
           expect(aggregate('1 - 1 + 1 - 1')).to.eql(0);
         });
+        it('works with a single negative number', () => {
+          expect(aggregate('-5')).to.eql(-5);
+        });
+        it('Subtraction with negative number', () => {
+          expect(aggregate('5 - -5')).to.eql(10);
+        });
+        it('should throw error when -- is used', () => {
+          expect(() => aggregate('--5')).to.throw('Error parsing "--5"');
+        });
+        it('should work with positive number(with plus sign)', () => {
+          expect(aggregate('+5')).to.eql(5);
+        });
       });
 
       describe('Multiplication Operator', () => {

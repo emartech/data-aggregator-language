@@ -130,6 +130,11 @@ class AggregatorParser extends Parser {
     });
 
     $.RULE('numberExpression', () => {
+      $.OPTION(() => {
+        $.OR([
+          { ALT: () => $.CONSUME(minusOperator) },
+          { ALT: () => $.CONSUME(plusOperator) }]);
+      });
       $.CONSUME(numberLiteral);
     });
 
