@@ -97,11 +97,17 @@ module.exports.optimization = {
 ## Commit Convention
 Semantic release depends on the [Angular commit message conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153). Please follow these.
 
+## Requirements
+See [package.json](./package.json) for required libraries and versions.
+
 ## Credit
 Uses [SAP/chevrotain](https://github.com/SAP/chevrotain) for parsing.
 
-## Support, Feedback, Contributing
+## Contributing
 This project is open to feature requests/suggestions, bug reports etc. via [GitHub issues](https://github.com/Emartech/data-aggregator-language/issues). Contribution and feedback are encouraged and always welcome. For more information about how to contribute, the project structure, as well as additional contribution information, see our [Contribution Guidelines](CONTRIBUTING.md).
+
+## How to Obtain Support
+This software is provided as-is.
 
 ## Code of Conduct
 
