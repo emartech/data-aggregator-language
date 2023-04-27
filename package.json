@@ -21,7 +21,7 @@
     "eslint-config-emarsys": "5.1.0",
     "eslint-plugin-require-path-exists": "1.1.9",
     "mocha": "10.2.0",
-    "semantic-release": "21.0.1"
+    "semantic-release": "19.0.5"
   },
   "engines": {
     "node": ">=14",
