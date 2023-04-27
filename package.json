@@ -5,7 +5,7 @@
   "scripts": {
     "semantic-release": "semantic-release",
     "test": "npm run test:unit && npm run code-style:fix",
-    "test:unit": "mocha ./test/setup-tests.js ./**/*.spec.js",
+    "test:unit": "mocha ./test/setup-tests.js ./src/**/*.spec.js ./*.spec.js",
     "code-style": "eslint --ext .js src test",
     "code-style:fix": "eslint --fix --ext .js src test"
   },
@@ -17,14 +17,14 @@
   },
   "devDependencies": {
     "chai": "4.2.0",
-    "eslint": "6.4.0",
+    "eslint": "8.39.0",
     "eslint-config-emarsys": "5.1.0",
     "eslint-plugin-require-path-exists": "1.1.9",
-    "mocha": "6.2.0",
-    "semantic-release": "15.13.24"
+    "mocha": "10.2.0",
+    "semantic-release": "21.0.1"
   },
   "engines": {
-    "node": "10.16.0",
-    "npm": "6.9.0"
+    "node": ">=14",
+    "npm": ">=6.14.0"
   }
 }
