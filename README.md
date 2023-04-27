@@ -115,4 +115,4 @@ We as members, contributors, and leaders pledge to make participation in our com
 
 ## Licensing
 
-Copyright 2018-2023 SAP SE or an SAP affiliate company and data-aggregator-language contributors. Please see our [LICENSE](LICENSE.txt) for copyright and license information.
+Copyright 2018-2023 SAP SE or an SAP affiliate company and data-aggregator-language contributors. Please see our [LICENSE](LICENSE.txt) for copyright and license information. Detailed information including third-party components and their licensing/copyright information is available [via the REUSE tool](https://api.reuse.software/info/github.com/Emartech/data-aggregator-language)
