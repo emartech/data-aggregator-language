@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: data-aggregator-language
+Upstream-Contact: sap_emarsys_analytics_admin@sap.com
+Source: https://github.com/emartech/data-aggregator-language
+
+Files: *
+Copyright: 2018-2023 SAP SE or an SAP affiliate company and data-aggregator-language contributors
+License: MIT
