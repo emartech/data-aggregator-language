@@ -29,7 +29,7 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-      # current setup uses npm install, do we care?
+
       - name: 📦 Install dependencies
         run: npm ci
 
@@ -38,25 +38,25 @@ jobs:
 
       - name: 🧪 Test
         run: npm run test:unit
-        env:
-          NODE_ENV: test
 
   publish:
-    name: Run semantic-version and publish to NPM
+    name: Run semantic-version and publish to NPM  
+    if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
     runs-on: ubuntu-latest
     needs: [ run-checks-and-tests ]
     steps:
       - name: run-semantic-version
-        run: echo "When everything else is working, run 'CI=true npm run semantic-release'"
-
-  # not enabled in the repo, do we want it turned on?
-  # dependabot-auto-merge-pr:
-  #   uses: ./.github/workflows/_dependabot-auto-merge-pr.yaml
-  #   secrets: inherit
-  #   needs: [ run-checks-and-tests ]
+        run: CI=true npm run semantic-release
 
   failed-slack-notification:
     if: ${{ always() && contains(needs.*.result, 'failure') }}
-    uses: ./.github/workflows/_failed_slack_notification.yaml
-    secrets: inherit
-    needs: [ run-checks-and-tests, publish ] #dependabot-auto-merge-pr,
+    runs-on: ubuntu-latest
+    needs: [ run-checks-and-tests, publish ]
+    steps:
+      - name: Slack notification
+        uses: 8398a7/action-slack@a189acbf0b7ea434558662ae25a0de71df69a435
+        with:
+          status: failure
+          fields: repo,message,commit,author,action,ref,workflow,job,took
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
