@@ -1,6 +1,5 @@
 {
   "name": "@emartech/data-aggregator-language",
-  "version": "1.0.0",
   "description": "Execute aggregation expressions on a given data set.",
   "main": "index.js",
   "files": [
