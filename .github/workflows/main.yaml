@@ -13,10 +13,6 @@ permissions:
   contents: read
   id-token: write
 
-env:
-  NPM_TOKEN: ${{ secrets.NPM_PUBLISHER_TOKEN }}
-  GH_TOKEN: ${{ secrets.GH_TOKEN }}
-
 jobs:
   run-checks-and-tests-and-publish:
     name: Run checks and tests. Update semantic version and release.
@@ -25,7 +21,7 @@ jobs:
       - name: 📂 Checkout code
         uses: actions/checkout@v3
         with:
-          token: ${{secrets.GH_TOKEN}}
+          persist-credentials: false
 
       - name: 💚 Setup Node.js
         uses: actions/setup-node@v3
@@ -45,6 +41,9 @@ jobs:
       - name: 🚀 Publish
         if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
         run: CI=true npm run semantic-release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_PUBLISHER_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
   failed-slack-notification:
     if: ${{ always() && contains(needs.*.result, 'failure') }}
