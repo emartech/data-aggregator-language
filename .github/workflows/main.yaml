@@ -15,13 +15,11 @@ permissions:
 
 jobs:
   run-checks-and-tests-and-publish:
-    name: Run checks and tests. Update semantic version and release.
+    name: Run checks and tests. On branch main, it updates semantic version and releases.
     runs-on: ubuntu-latest
     steps:
       - name: 📂 Checkout code
         uses: actions/checkout@v3
-        with:
-          persist-credentials: false
 
       - name: 💚 Setup Node.js
         uses: actions/setup-node@v3

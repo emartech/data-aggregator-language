@@ -1,7 +1,15 @@
 {
   "name": "@emartech/data-aggregator-language",
+  "version": "1.0.0",
   "description": "Execute aggregation expressions on a given data set.",
   "main": "index.js",
+  "files": [
+    ".reuse",
+    "LICENSES",
+    "src",
+    "*.md",
+    "LICENSE.txt"
+  ],
   "scripts": {
     "semantic-release": "semantic-release",
     "test": "npm run test:unit && npm run code-style:fix",
