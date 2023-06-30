@@ -43,7 +43,7 @@ jobs:
         run: CI=true npm run semantic-release
         env:
           NPM_TOKEN: ${{ secrets.NPM_PUBLISHER_TOKEN }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.SEMANTIC_RELEASE_GH_TOKEN }}
 
   failed-slack-notification:
     if: ${{ always() && contains(needs.*.result, 'failure') }}
