@@ -4,9 +4,17 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - dependabot.yml
+      - repo-info.json
+      - .gitignore
   pull_request:
     branches:
       - "*"
+    paths-ignore:
+      - dependabot.yml
+      - repo-info.json
+      - .gitignore
 
 permissions:
   actions: read
