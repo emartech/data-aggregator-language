@@ -59,7 +59,7 @@ jobs:
     needs: [ run-checks-and-tests-and-publish ]
     steps:
       - name: Slack notification
-        uses: 8398a7/action-slack@a189acbf0b7ea434558662ae25a0de71df69a435
+        uses: 8398a7/action-slack@28ba43ae48961b90635b50953d216767a6bea486
         with:
           status: failure
           fields: repo,message,commit,author,action,ref,workflow,job,took
